@@ -1,11 +1,12 @@
-package com.meytal.crm.backend.dal.mappers;
+package crm.backend.dal.mappers;
 
-import com.meytal.crm.backend.dal.pojo.Company;
+import crm.backend.dal.pojo.Company;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by gurt on 17-Feb-17.
@@ -25,13 +26,14 @@ public class CompanyMapper implements RowMapper<Company> {
         String invoices = resultSet.getString("invoices");
         String quotas = resultSet.getString("quotas");
 
-        if (invoices != null && invoices != "") {
+        if (invoices != null && !invoices.equals("")) {
             company.setInvoices(stringToArray(invoices));
         } else {
             company.setInvoices(null);
         }
 
-        if (quotas != null && invoices != "") {
+        assert invoices != null;
+        if (quotas != null && !invoices.equals("")) {
             company.setQuotas(stringToArray(quotas));
         } else {
             company.setQuotas(null);
@@ -43,9 +45,7 @@ public class CompanyMapper implements RowMapper<Company> {
 
     private ArrayList<String> stringToArray(String input) {
         ArrayList<String> output = new ArrayList<String>();
-        for (String s : input.split(",")) {
-            output.add(s);
-        }
+        Collections.addAll(output, input.split(","));
         return output;
     }
 }

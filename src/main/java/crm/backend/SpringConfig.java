@@ -1,7 +1,7 @@
-package com.meytal.crm.backend;
+package crm.backend;
 
-import com.meytal.crm.backend.dal.impl.CompanyDaoImpl;
-import com.meytal.crm.backend.dal.impl.PersonDaoImpl;
+import crm.backend.dal.impl.CompanyDaoImpl;
+import crm.backend.dal.impl.PersonDaoImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;

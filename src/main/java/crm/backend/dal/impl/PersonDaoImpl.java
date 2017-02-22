@@ -1,8 +1,8 @@
-package com.meytal.crm.backend.dal.impl;
+package crm.backend.dal.impl;
 
-import com.meytal.crm.backend.dal.dao.PersonDao;
-import com.meytal.crm.backend.dal.mappers.PersonMapper;
-import com.meytal.crm.backend.dal.pojo.Person;
+import crm.backend.dal.dao.PersonDao;
+import crm.backend.dal.mappers.PersonMapper;
+import crm.backend.dal.pojo.Person;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -15,9 +15,9 @@ import java.util.Map;
  * Created by gurt on 16-Feb-17.
  */
 public class PersonDaoImpl implements PersonDao {
-    static Logger LOG = Logger.getLogger(PersonDaoImpl.class.getName());
-    DataSource dataSource;
-    JdbcTemplate jdbcTemplateObject;
+    private static Logger LOG = Logger.getLogger(PersonDaoImpl.class.getName());
+    private DataSource dataSource;
+    private JdbcTemplate jdbcTemplateObject;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -33,8 +33,7 @@ public class PersonDaoImpl implements PersonDao {
 
     public Person getPerson(String firstName, String lastName) {
         String sql = "select * from person where firstName=? and lastName=?";
-        Person person = jdbcTemplateObject.queryForObject(sql,new Object[]{firstName,lastName},new PersonMapper());
-        return person;
+        return jdbcTemplateObject.queryForObject(sql,new Object[]{firstName,lastName},new PersonMapper());
     }
 
     public void delete(String name) {

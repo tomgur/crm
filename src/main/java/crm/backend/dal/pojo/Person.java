@@ -1,4 +1,4 @@
-package com.meytal.crm.backend.dal.pojo;
+package crm.backend.dal.pojo;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -7,17 +7,17 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class Person {
-    int id;
-    String firstName;
-    String lastName;
-    String company;
-    String phone;
-    String email;
-    String fields;
-    String courses;
-    int imageId;
-    String type;
-    String tz;
+    private int id;
+    private String firstName;
+    private String lastName;
+    private String company;
+    private String phone;
+    private String email;
+    private String fields;
+    private String courses;
+    private int imageId;
+    private String type;
+    private String tz;
 
     public String getTz() {
         return tz;
@@ -109,16 +109,14 @@ public class Person {
 
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder();
-        s.append("First Name: ").append(getFirstName());
-        s.append("\n Last Name: ").append(getLastName());
-        s.append("\n Teudat Zehut: ").append(getTz());
-        s.append("\n Company: ").append(getCompany());
-        s.append("\n Phone: ").append(getPhone());
-        s.append("\n Email: ").append(getEmail());
-        s.append("\n Fields: ").append(getFields());
-        s.append("\n Courses: ").append(getCourses());
-        s.append("\n Type: ").append(getType());
-        return s.toString();
+        return "First Name: " + getFirstName() +
+                "\n Last Name: " + getLastName() +
+                "\n Teudat Zehut: " + getTz() +
+                "\n Company: " + getCompany() +
+                "\n Phone: " + getPhone() +
+                "\n Email: " + getEmail() +
+                "\n Fields: " + getFields() +
+                "\n Courses: " + getCourses() +
+                "\n Type: " + getType();
     }
 }

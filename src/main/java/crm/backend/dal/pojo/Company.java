@@ -1,4 +1,4 @@
-package com.meytal.crm.backend.dal.pojo;
+package crm.backend.dal.pojo;
 
 import java.util.ArrayList;
 
@@ -6,15 +6,15 @@ import java.util.ArrayList;
  * Created by gurt on 17-Feb-17.
  */
 public class Company {
-    int id;
-    String name;
-    String address;
-    String phone;
-    String fax;
-    String email;
-    String contactPerson;
-    ArrayList invoices;
-    ArrayList quotas;
+    private int id;
+    private String name;
+    private String address;
+    private String phone;
+    private String fax;
+    private String email;
+    private String contactPerson;
+    private ArrayList invoices;
+    private ArrayList quotas;
 
     public int getId() {
         return id;
@@ -90,16 +90,14 @@ public class Company {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("ID: " + getId())
-                .append("\n Name: " + getName())
-                .append("\n Phone: " + getPhone())
-                .append("\n Fax: " + getFax())
-                .append("\n Address: " + getAddress())
-                .append("\n Email: " + getEmail())
-                .append("\n Contact: " + getContactPerson())
-                .append("\n Invoices: " + getInvoices())
-                .append("\n Quotas: " + getQuotas());
-        return stringBuilder.toString();
+        return ("ID: " + getId()) +
+                "\n Name: " + getName() +
+                "\n Phone: " + getPhone() +
+                "\n Fax: " + getFax() +
+                "\n Address: " + getAddress() +
+                "\n Email: " + getEmail() +
+                "\n Contact: " + getContactPerson() +
+                "\n Invoices: " + getInvoices() +
+                "\n Quotas: " + getQuotas();
     }
 }

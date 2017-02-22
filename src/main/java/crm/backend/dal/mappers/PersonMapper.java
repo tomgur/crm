@@ -1,6 +1,6 @@
-package com.meytal.crm.backend.dal.mappers;
+package crm.backend.dal.mappers;
 
-import com.meytal.crm.backend.dal.pojo.Person;
+import crm.backend.dal.pojo.Person;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

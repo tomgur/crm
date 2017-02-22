@@ -1,8 +1,8 @@
-package com.meytal.crm.backend;
+package crm.backend;
 
-import com.meytal.crm.backend.dal.impl.CompanyDaoImpl;
-import com.meytal.crm.backend.dal.impl.PersonDaoImpl;
-import com.meytal.crm.backend.dal.pojo.Person;
+import crm.backend.dal.impl.CompanyDaoImpl;
+import crm.backend.dal.impl.PersonDaoImpl;
+import crm.backend.dal.pojo.Person;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * Created by gurt on 16-Feb-17.
  */
 public class Main {
-    static Logger LOG = Logger.getLogger(Main.class.getName());
+    private static Logger LOG = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
         LOG.info("Initializing app");
