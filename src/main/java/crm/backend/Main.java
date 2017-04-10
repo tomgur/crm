@@ -33,10 +33,10 @@ public class Main {
 //        companyDao.update("HPE","fax","035399998");
 //        Company hpe = companyDao.getCompany("HPE");
 //        System.out.println(hpe.toString());
-        personDao.update("Tom", "Gur","company","Slave for Israeli Government");
-        List<Person> hpePeople = personDao.getAll();
-        for(Person p : hpePeople) {
-            System.out.println(p.toString());
-        }
+        personDao.update("Tom", "Gur","phone","0507448140");
+//        List<Person> hpePeople = personDao.getAll();
+//        for(Person p : hpePeople) {
+//            System.out.println(p.toString());
+//        }
     }
 }

@@ -1,10 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resources.js"></script>
+    <script src="js/controller.js"></script>
     <meta charset="UTF-8">
     <title>Test Homepage</title>
 </head>
-<body>
-<h1>Hello World!</h1>
+<body ng-app="app" ng-controller="MyCtrl1">
+<h1>People</h1>
+<table width="70%" border="1" align="center">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Company</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>TZ</th>
+    </tr>
+    <tr ng-repeat="person in people">
+        <td>{{ person.firstName }}</td>
+        <td>{{ person.lastName }}</td>
+        <td>{{ person.company }}</td>
+        <td>{{ person.phone }}</td>
+        <td>{{ person.email }}</td>
+        <td>{{ person.tz }}</td>
+    </tr>
+
+</table>
 </body>
 </html>
