@@ -41,7 +41,28 @@ public class PersonDaoImpl implements PersonDao {
     }
 
     public List<Person> getAll() {
-        return null;
+        String sql = "SELECT * FROM person";
+
+        List<Person> people = new ArrayList<Person>();
+
+        List<Map<String, Object>> rows = jdbcTemplateObject.queryForList(sql);
+        for (Map row : rows) {
+            Person person = new Person();
+            person.setEmail((String) row.get("email"));
+            person.setId((Integer) row.get("id"));
+            person.setCompany((String) row.get("company"));
+            person.setCourses((String) row.get("courses"));
+            person.setFields((String) row.get("fields"));
+            person.setFirstName((String) row.get("firstName"));
+            person.setLastName((String) row.get("lastName"));
+            person.setPhone((String) row.get("phone"));
+            person.setType((String) row.get("type"));
+            person.setTz((String) row.get("tz"));
+            person.setImageId(row.get("imageId")!=null ? (Integer)row.get("imageId") : 0);
+            people.add(person);
+        }
+
+        return people;
     }
 
     public void update(String firstName, String lastName, String column, String value) {
