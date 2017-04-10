@@ -7,7 +7,10 @@ import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by gurt on 16-Feb-17.
@@ -39,7 +42,26 @@ public class CompanyDaoImpl implements CompanyDao {
     }
 
     public List<Company> getAll() {
-        return null;
+        String sql = "select * from company";
+        List<Map<String, Object>> rows = jdbcTemplateObject.queryForList(sql);
+        return iterateRows(rows);
+    }
+
+    public List<Company> iterateRows(List<Map<String, Object>> rows) {
+        List<Company> companies = new ArrayList<Company>();
+        for (Map row : rows) {
+            Company company = new Company();
+            company.setName((String) row.get("name"));
+            company.setContactPerson((String) row.get("contactPerson"));
+            company.setAddress((String) row.get("address"));
+            company.setEmail((String) row.get("email"));
+            company.setFax((String) row.get("fax"));
+            company.setPhone((String) row.get("phone"));
+            company.setInvoices((new ArrayList<String>(Arrays.asList(row.get("invoices").toString().split(",")))));
+            company.setQuotas(new ArrayList<String>(Arrays.asList(row.get("quotas").toString().split(","))));
+            companies.add(company);
+        }
+        return companies;
     }
 
     public void update(String name, String column, String value) {
