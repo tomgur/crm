@@ -1,10 +1,12 @@
 <html lang="en" ng-app="StarterApp">
 <head>
     <link rel="stylesheet" href="webjars/angular-material/1.1.3/angular-material.min.css">
+    <link rel="stylesheet" href="webjars/github-com-iamisti-mdDataTable/2.2.0/md-data-table-style.css">
     <link rel="stylesheet" href="css/crm.css">
 </head>
 <body layout="row" ng-controller="AppCtrl">
-<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left"
+            md-is-locked-open="$mdMedia('gt-md')">
     <md-toolbar class="md-hue-2">
         <span flex></span>
     </md-toolbar>
@@ -55,14 +57,6 @@
                 <ng-md-icon icon="more_vert"></ng-md-icon>
             </md-button>
         </div>
-        <md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
-            <md-tab id="tab1" aria-controls="tab1-content">
-                Latest
-            </md-tab>
-            <md-tab id="tab2" aria-controls="tab2-content">
-                Favorites
-            </md-tab>
-        </md-tabs>
     </md-toolbar>
     <md-toolbar class="md-hue-1" ng-show="showSearch">
         <div class="md-toolbar-tools">
@@ -86,97 +80,46 @@
 
     </md-toolbar>
     <md-content flex md-scroll-y>
-        <ui-view layout="column" layout-fill layout-padding>
-            <div class="inset" hide-sm></div>
-            <ng-switch on="data.selectedIndex" class="tabpanel-container">
-                <div role="tabpanel"
-                     id="tab1-content"
-                     aria-labelledby="tab1"
-                     ng-switch-when="0"
-                     md-swipe-left="next()"
-                     md-swipe-right="previous()"
-                     layout="row" layout-align="center center">
-                    <md-card flex-gt-sm="90" flex-gt-md="80">
-                        <md-card-content>
-                            <h2>Activity</h2>
-                            <md-list>
-                                <md-item ng-repeat="item in activity | filter:search">
-                                    <md-item-content>
-                                        <div class="md-tile-left inset" hide-sm>
-                                            <user-avatar></user-avatar>
-                                        </div>
-                                        <div class="md-tile-content">
-                                            <h3>{{item.what}}</h3>
-                                            <h4>{{item.who}}</h4>
-                                            <p>
-                                                {{item.notes}}
-                                            </p>
-                                        </div>
-                                    </md-item-content>
-                                    <md-divider md-inset hide-sm ng-if="!$last"></md-divider>
-                                    <md-divider hide-gt-sm ng-if="!$last"></md-divider>
-                                </md-item>
-                                <md-divider></md-divider>
-                                <md-item layout class="inset">
-                                    <md-button layout layout-align="start center" flex class="md-primary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg> More
-                                    </md-button>
-                                </md-item>
-                            </md-list>
-                        </md-card-content>
-                    </md-card>
-                </div>
-                <div role="tabpanel"
-                     id="tab2-content"
-                     aria-labelledby="tab2"
-                     ng-switch-when="1"
-                     md-swipe-left="next()"
-                     md-swipe-right="previous()"
-                     layout="row" layout-align="center center">
-                    <md-card flex-gt-sm="90" flex-gt-md="80">
-                        <md-card-content>
-                            <h2>Favorites</h2>
-                            <md-list>
-                                <md-item ng-repeat="item in activity | filter:search | orderBy:'-what'">
-                                    <md-item-content>
-                                        <div class="md-tile-left inset" hide-sm>
-                                            <user-avatar></user-avatar>
-                                        </div>
-                                        <div class="md-tile-content">
-                                            <h3>{{item.what}}</h3>
-                                            <h4>{{item.who}}</h4>
-                                            <p>
-                                                {{item.notes}}
-                                            </p>
-                                        </div>
-                                    </md-item-content>
-                                    <md-divider md-inset hide-sm ng-if="!$last"></md-divider>
-                                    <md-divider hide-gt-sm ng-if="!$last"></md-divider>
-                                </md-item>
-                                <md-divider></md-divider>
-                                <md-item layout class="inset">
-                                    <md-button layout layout-align="start center" flex class="md-primary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg> More
-                                    </md-button>
-                                </md-item>
-                            </md-list>
-                        </md-card-content>
-                    </md-card>
-                </div>
-
-            </ng-switch>
-
-        </ui-view>
+        <div ng-controller="peopleController" layout="margin">
+            <mdt-table mdt-row="{
+                      data: people,
+                      'column-keys': [
+                          'id',
+                          'firstName',
+                          'lastName',
+                          'company',
+                          'phone',
+                          'email',
+                          'tz'
+                      ]
+                      }">
+                <mdt-header-row>
+                    <mdt-column align-rule="left">ID</mdt-column>
+                    <mdt-column align-rule="left">First Name</mdt-column>
+                    <mdt-column align-rule="left">Last Name</mdt-column>
+                    <mdt-column align-rule="left">Company</mdt-column>
+                    <mdt-column align-rule="left">Phone #</mdt-column>
+                    <mdt-column align-rule="left">Email</mdt-column>
+                    <mdt-column align-rule="left">Identification #</mdt-column>
+                </mdt-header-row>
+            </mdt-table>
+        </div>
     </md-content>
 </div>
 <!-- Angular Material Dependencies -->
-<script src="webjars/angular/1.6.4/angular.min.js"></script>
-<script src="webjars/angular-animate/1.6.4/angular-animate.min.js"></script>
-<script src="webjars/angular-aria/1.6.4/angular-aria.min.js"></script>
+<script src="webjars/angular/1.5.8/angular.min.js"></script>
+<script src="webjars/angular-animate/1.5.8/angular-animate.min.js"></script>
+<script src="webjars/angular-aria/1.5.8/angular-aria.min.js"></script>
 
-<script src="webjars/angular-material/1.1.3/angular-material.min.js"></script>
+<script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
 
 <script src="webjars/angular-material-icons/0.7.1/angular-material-icons.min.js"></script>
+<script src="webjars/angular-sanitize/1.5.8/angular-sanitize.min.js"></script>
+<script src="webjars/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+
+<script src="webjars/github-com-iamisti-mdDataTable/2.2.0/md-data-table-templates.js"></script>
+<script src="webjars/github-com-iamisti-mdDataTable/2.2.0/md-data-table.js"></script>
 <script src="js/script.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-var app = angular.module('StarterApp', ['ngMaterial', 'ngMdIcons']);
+var app = angular.module("StarterApp", ["ngMaterial", "ngMdIcons", "ngSanitize", "mdDataTable"]);
 
 app.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog', function($scope, $mdBottomSheet, $mdSidenav, $mdDialog){
     $scope.toggleSidenav = function(menuId) {
@@ -135,4 +135,21 @@ app.config(function($mdThemingProvider) {
         .accentPalette('orange');
     $mdThemingProvider.theme('input', 'default')
         .primaryPalette('grey')
+});
+
+app.controller('peopleController', ['$scope','peopleFactory', function ($scope, peopleFactory) {
+    peopleFactory.getPeople().then(function (responseData) {
+        $scope.people = responseData.data;
+    })
+}]);
+
+app.factory('peopleFactory', function ($http) {
+    return {
+        getPeople : function() {
+            return $http({
+                method : 'GET',
+                url : 'http://localhost:8080/crm/rest/getPeople'
+            });
+        }
+    }
 });
