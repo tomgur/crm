@@ -1,0 +1,37 @@
+<div layout-margin>
+    <md-card style="margin:0px">
+        <md-input-container style="margin:15px;">
+            <label>Search</label>
+            <input type="text" ng-model="filterName">
+        </md-input-container>
+
+        <div ng-hide="true">
+            {{(filteredItems = (people | filter: filterName))}}
+        </div>
+    </md-card>
+
+    <mdt-table animate-sort-icon="true"
+               paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,100]}"
+               mdt-row="{
+                      data: filteredItems,
+                      'column-keys': [
+                          'personId',
+                          'firstName',
+                          'lastName',
+                          'company',
+                          'phone',
+                          'email',
+                          'tz'
+                      ]
+                      }">
+        <mdt-header-row>
+            <mdt-column align-rule="left">ID</mdt-column>
+            <mdt-column column-sort="true" align-rule="left">First Name</mdt-column>
+            <mdt-column column-sort="true" align-rule="left">Last Name</mdt-column>
+            <mdt-column column-sort="true" align-rule="left">Company</mdt-column>
+            <mdt-column align-rule="left">Phone #</mdt-column>
+            <mdt-column column-sort="true" align-rule="left">Email</mdt-column>
+            <mdt-column align-rule="left">Identification #</mdt-column>
+        </mdt-header-row>
+    </mdt-table>
+</div>

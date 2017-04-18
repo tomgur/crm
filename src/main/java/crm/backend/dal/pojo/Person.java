@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class Person {
-    private int id;
+    private int personId;
     private String firstName;
     private String lastName;
     private String company;
@@ -27,12 +27,12 @@ public class Person {
         this.tz = tz;
     }
 
-    public int getId() {
-        return id;
+    public int getPersonId() {
+        return personId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
 
     public String getFirstName() {

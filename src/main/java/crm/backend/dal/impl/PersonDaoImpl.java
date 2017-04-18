@@ -62,7 +62,7 @@ public class PersonDaoImpl implements PersonDao {
         for (Map row : rows) {
             Person person = new Person();
             person.setEmail((String) row.get("email"));
-            person.setId((Integer) row.get("id"));
+            person.setPersonId((Integer) row.get("personId"));
             person.setCompany((String) row.get("company"));
             person.setCourses((String) row.get("courses"));
             person.setFields((String) row.get("fields"));
