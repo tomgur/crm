@@ -13,8 +13,8 @@ public class Company {
     private String fax;
     private String email;
     private String contactPerson;
-    private ArrayList invoices;
-    private ArrayList quotas;
+    private ArrayList<Integer> invoices;
+    private ArrayList<Integer> quotas;
 
     public int getId() {
         return id;

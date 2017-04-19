@@ -51,13 +51,19 @@ public class CompanyDaoImpl implements CompanyDao {
         List<Company> companies = new ArrayList<Company>();
         for (Map row : rows) {
             Company company = new Company();
+            company.setId((Integer) row.get("id"));
             company.setName((String) row.get("name"));
             company.setContactPerson((String) row.get("contactPerson"));
             company.setAddress((String) row.get("address"));
             company.setEmail((String) row.get("email"));
             company.setFax((String) row.get("fax"));
             company.setPhone((String) row.get("phone"));
-            company.setInvoices((new ArrayList<String>(Arrays.asList(row.get("invoices").toString().split(",")))));
+            String[] strings = row.get("invoices").toString().split(",");
+            ArrayList<Integer> invoiceIntList = new ArrayList<Integer>();
+            for (String s : strings){
+                invoiceIntList.add(Integer.parseInt(s));
+            }
+            company.setInvoices(invoiceIntList);
             company.setQuotas(new ArrayList<String>(Arrays.asList(row.get("quotas").toString().split(","))));
             companies.add(company);
         }

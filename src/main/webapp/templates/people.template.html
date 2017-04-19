@@ -2,30 +2,21 @@
     <md-card style="margin:0px">
         <md-input-container style="margin:15px;">
             <label>Search</label>
-            <input type="text" ng-model="filterName">
+            <input type="text" ng-model="peopleFilter">
         </md-input-container>
 
         <div ng-hide="true">
-            {{(filteredItems = (people | filter: filterName))}}
+            {{(filteredPeople = (people | filter: peopleFilter))}}
         </div>
     </md-card>
 
     <mdt-table animate-sort-icon="true"
                paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,100]}"
-               mdt-row="{
-                      data: filteredItems,
-                      'column-keys': [
-                          'personId',
-                          'firstName',
-                          'lastName',
-                          'company',
-                          'phone',
-                          'email',
-                          'tz'
-                      ]
-                      }">
+               selectable-rows="true"
+               selected-row-callback="selectedRowCallback(rows)"
+               mdt-trigger-request="reloadPeopleTable()">
         <mdt-header-row>
-            <mdt-column align-rule="left">ID</mdt-column>
+            <mdt-column column-sort="true" align-rule="left">ID</mdt-column>
             <mdt-column column-sort="true" align-rule="left">First Name</mdt-column>
             <mdt-column column-sort="true" align-rule="left">Last Name</mdt-column>
             <mdt-column column-sort="true" align-rule="left">Company</mdt-column>
@@ -33,5 +24,15 @@
             <mdt-column column-sort="true" align-rule="left">Email</mdt-column>
             <mdt-column align-rule="left">Identification #</mdt-column>
         </mdt-header-row>
+        <mdt-row ng-repeat="person in filteredPeople"
+                 table-row-id="person.personId">
+            <mdt-cell>{{ person.personId }}</mdt-cell>
+            <mdt-cell>{{ person.firstName }}</mdt-cell>
+            <mdt-cell>{{ person.lastName }}</mdt-cell>
+            <mdt-cell>{{ person.company }}</mdt-cell>
+            <mdt-cell>{{ person.phone }}</mdt-cell>
+            <mdt-cell>{{ person.email }}</mdt-cell>
+            <mdt-cell>{{ person.tz }}</mdt-cell>
+        </mdt-row>
     </mdt-table>
 </div>

@@ -2,40 +2,40 @@
     <md-card style="margin:0px">
         <md-input-container style="margin:15px;">
             <label>Search</label>
-            <input type="text" ng-model="filterName">
+            <input type="text" ng-model="companyFilter">
         </md-input-container>
 
         <div ng-hide="true">
-            {{(filteredItems = (companies | filter: filterName))}}
+            {{(filteredCompanies = (companies | filter: companyFilter))}}
         </div>
     </md-card>
 
     <mdt-table animate-sort-icon="true"
                paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,100]}"
-               mdt-row="{
-                      data: companies,
-                      'column-keys': [
-                          'id',
-                          'name',
-                          'address',
-                          'phone',
-                          'fax',
-                          'email',
-                          'contactPerson',
-                          'invoices',
-                          'quotas'
-                      ]
-                      }">
+               mdt-row="{'data': filteredCompanies,
+               'table-row-id-key': 'id',
+               'column-keys': ['name', 'address', 'phone', 'fax', 'email', 'contactPerson', 'invoices', 'quotas', 'edit', 'delete']}">
+
         <mdt-header-row>
-            <mdt-column align-rule="left">ID</mdt-column>
-            <mdt-column column-sort="true" align-rule="left">Name</mdt-column>
-            <mdt-column column-sort="true" align-rule="left">Address</mdt-column>
-            <mdt-column column-sort="true" align-rule="left">Phone</mdt-column>
-            <mdt-column align-rule="left">Fax</mdt-column>
-            <mdt-column column-sort="true" align-rule="left">Email</mdt-column>
-            <mdt-column align-rule="left">Contact</mdt-column>
-            <mdt-column align-rule="left">Invoices</mdt-column>
-            <mdt-column align-rule="left">Quotas</mdt-column>
+            <mdt-column column-sort="true">Name</mdt-column>
+            <mdt-column column-sort="true">Address</mdt-column>
+            <mdt-column column-sort="true">Phone</mdt-column>
+            <mdt-column>Fax</mdt-column>
+            <mdt-column column-sort="true">Email</mdt-column>
+            <mdt-column>Contact</mdt-column>
+            <mdt-column>Invoices</mdt-column>
+            <mdt-column>Quotas</mdt-column>
+            <mdt-column align-rule="center">Edit</mdt-column>
+            <mdt-column align-rule="center">Delete</mdt-column>
+
+            <mdt-custom-cell column-key="edit" html-content="true">
+                <mdt-custom-cell-edit-button ng-click="clientScope.showRowId( rowId )">test</mdt-custom-cell-edit-button>
+            </mdt-custom-cell>
+            <mdt-custom-cell column-key="delete" html-content="true">
+                <mdt-custom-cell-delete-button ng-click="clientScope.showRowId(rowId)">test</mdt-custom-cell-delete-button>
+            </mdt-custom-cell>
+            <mdt-custom-cell column-key="invoices">{{value}}</mdt-custom-cell>
+            <mdt-custom-cell column-key="quotas">{{value}}</mdt-custom-cell>
         </mdt-header-row>
     </mdt-table>
 </div>
