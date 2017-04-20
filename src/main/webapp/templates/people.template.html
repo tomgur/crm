@@ -15,23 +15,19 @@
                mdt-row="{
                          'data' : filteredPeople,
                          'table-row-id-key' : 'personId',
-                         'column-keys' : ['firstName','lastName','company','phone','email','tz','edit','delete']}">
+                         'column-keys' : ['firstName','lastName','client','phone','email','tz','edit']}">
 
         <mdt-header-row>
             <mdt-column column-sort="true" align-rule="left">First Name</mdt-column>
             <mdt-column column-sort="true" align-rule="left">Last Name</mdt-column>
-            <mdt-column column-sort="true" align-rule="left">Company</mdt-column>
+            <mdt-column column-sort="true" align-rule="left">Client</mdt-column>
             <mdt-column align-rule="left">Phone #</mdt-column>
             <mdt-column column-sort="true" align-rule="left">Email</mdt-column>
             <mdt-column align-rule="left">Identification #</mdt-column>
             <mdt-column align-rule="center">Edit</mdt-column>
-            <mdt-column align-rule="center">Delete</mdt-column>
 
             <mdt-custom-cell column-key="edit" html-content="true">
                 <mdt-custom-cell-edit-button ng-click="clientScope.showPersonInfoDialog( rowId )">test</mdt-custom-cell-edit-button>
-            </mdt-custom-cell>
-            <mdt-custom-cell column-key="delete" html-content="true">
-                <mdt-custom-cell-delete-button ng-click="clientScope.confirmDeletePerson(rowId)">test</mdt-custom-cell-delete-button>
             </mdt-custom-cell>
 
             <!-- ID model bind - for delete -->

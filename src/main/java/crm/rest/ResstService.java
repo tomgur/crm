@@ -2,17 +2,15 @@ package crm.rest;
 
 import com.google.gson.Gson;
 import crm.backend.SpringConfig;
-import crm.backend.dal.impl.CompanyDaoImpl;
+import crm.backend.dal.impl.ClientDaoImpl;
 import crm.backend.dal.impl.PersonDaoImpl;
-import crm.backend.dal.pojo.Company;
+import crm.backend.dal.pojo.Client;
 import crm.backend.dal.pojo.Person;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -22,7 +20,7 @@ import java.util.List;
 public class ResstService {
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
     PersonDaoImpl personDao = context.getBean(PersonDaoImpl.class);
-    CompanyDaoImpl companyDao = context.getBean(CompanyDaoImpl.class);
+    ClientDaoImpl clientDao = context.getBean(ClientDaoImpl.class);
 
     @GET
     @Path("/getPeople")
@@ -42,10 +40,10 @@ public class ResstService {
     }
 
     @GET
-    @Path("/getCompanies")
+    @Path("/getClients")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllCompanies() {
-        List<Company> all = companyDao.getAll();
+    public Response getAllClients() {
+        List<Client> all = clientDao.getAll();
         String s = new Gson().toJson(all);
         return Response.status(200).entity(s).build();
     }
@@ -55,7 +53,7 @@ public class ResstService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addPerson(String json) {
         Person person = new Gson().fromJson(json,Person.class);
-        personDao.create(person.getFirstName(),person.getLastName(),person.getCompany(),person.getPhone(),person.getEmail(),person.getTz());
+        personDao.create(person.getFirstName(),person.getLastName(),person.getClient(),person.getPhone(),person.getEmail(),person.getTz());
         return Response.status(Response.Status.OK).entity(json).build();
     }
 

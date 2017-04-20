@@ -1,7 +1,7 @@
 /**
  * Created by gurt on 4/20/2017.
  */
-app.controller('mainController', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdDialog', '$location', function ($scope, $mdBottomSheet, $mdSidenav, $mdDialog, $location) {
+app.controller('mainController', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdDialog', '$location', '$mdToast', function ($scope, $mdBottomSheet, $mdSidenav, $mdDialog, $location, $mdToast) {
     $scope.changePath = function (path, title) {
         $scope.title = title;
         $location.path(path);
@@ -21,15 +21,26 @@ app.controller('mainController', ['$scope', '$mdBottomSheet', '$mdSidenav', '$md
             icon: 'contacts'
         },
         {
-            link: '/companies',
-            title: 'Companies',
+            link: '/clients',
+            title: 'Clients',
             icon: 'account_balance'
         },
         {
             link: '/courses',
             title: 'Courses',
             icon: 'work'
-        }
+        },
+        {
+            link: '/quotas',
+            title: 'Quotas',
+            icon: 'list'
+        },
+        {
+            link: '/Invoices',
+            title: 'Invoices',
+            icon: 'receipt'
+        },
+
     ];
     $scope.admin = [
         {
@@ -66,5 +77,13 @@ app.controller('mainController', ['$scope', '$mdBottomSheet', '$mdSidenav', '$md
             scope : $scope,
             preserveScope : true
         });
+    };
+    $scope.showToast = function (message) {
+        $mdToast.show(
+            $mdToast.simple()
+                .textContent(message)
+                .hideDelay(3000)
+                .position("top right")
+        );
     }
 }]);

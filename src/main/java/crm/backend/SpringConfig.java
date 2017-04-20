@@ -1,6 +1,6 @@
 package crm.backend;
 
-import crm.backend.dal.impl.CompanyDaoImpl;
+import crm.backend.dal.impl.ClientDaoImpl;
 import crm.backend.dal.impl.PersonDaoImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,9 +32,9 @@ public class SpringConfig {
     }
 
     @Bean
-    public CompanyDaoImpl companyDaoImpl() {
-        CompanyDaoImpl companyDaoImpl = new CompanyDaoImpl();
-        companyDaoImpl.setDataSource(driverManagerDataSource());
-        return companyDaoImpl;
+    public ClientDaoImpl clientDaoImpl() {
+        ClientDaoImpl clientDaoImpl = new ClientDaoImpl();
+        clientDaoImpl.setDataSource(driverManagerDataSource());
+        return clientDaoImpl;
     }
 }

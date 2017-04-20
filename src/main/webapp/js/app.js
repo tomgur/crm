@@ -10,9 +10,9 @@ app.config(function ($mdThemingProvider, $routeProvider) {
             templateUrl: "templates/people.template.html",
             controller: "peopleController",
         })
-        .when("/companies", {
-            templateUrl: "templates/companies.template.html",
-            controller: "companiesController"
+        .when("/clients", {
+            templateUrl: "templates/clients.template.html",
+            controller: "clientsController"
         })
 
     // Color theme

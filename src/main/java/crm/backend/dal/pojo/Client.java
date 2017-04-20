@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by gurt on 17-Feb-17.
  */
-public class Company {
+public class Client {
     private int id;
     private String name;
     private String address;

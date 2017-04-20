@@ -2,17 +2,17 @@
     <md-card style="margin:0px">
         <md-input-container style="margin:15px;">
             <label>Search</label>
-            <input type="text" ng-model="companyFilter">
+            <input type="text" ng-model="clientFilter">
         </md-input-container>
 
         <div ng-hide="true">
-            {{(filteredCompanies = (companies | filter: companyFilter))}}
+            {{(filteredClients = (clients | filter: clientFilter))}}
         </div>
     </md-card>
 
     <mdt-table animate-sort-icon="true"
                paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,100]}"
-               mdt-row="{'data': filteredCompanies,
+               mdt-row="{'data': filteredClients,
                'table-row-id-key': 'id',
                'column-keys': ['name', 'address', 'phone', 'fax', 'email', 'contactPerson', 'invoices', 'quotas', 'edit', 'delete']}">
 

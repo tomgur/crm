@@ -26,8 +26,8 @@
             </div>
             <div layout layout-sm="column">
                 <md-input-container flex>
-                    <label>Company</label>
-                    <input ng-model="user.company">
+                    <label>Client</label>
+                    <input ng-model="user.client">
                 </md-input-container>
                 <md-input-container flex>
                     <label>ID Number</label>
@@ -37,7 +37,9 @@
         </form>
     </md-content>
     <md-dialog-actions layout="row"><span flex></span>
-        <md-button ng-click="cancel()"> Cancel</md-button>
+        <md-button class="md-warn" ng-click="confirmDeletePerson()">Delete</md-button>
+        <span flex></span>
+        <md-button ng-click="cancel()">Cancel</md-button>
         <md-button class="md-primary">Update</md-button>
     </md-dialog-actions>
 </md-dialog>

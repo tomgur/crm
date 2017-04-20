@@ -25,9 +25,9 @@ public class PersonDaoImpl implements PersonDao {
         LOG.info("Person DAO is ready");
     }
 
-    public void create(String firstName, String lastName, String company, String phone, String email, String tz) {
-        String sql = "insert into person (firstName,lastName,company,phone,email,tz) values (?,?,?,?,?,?)";
-        jdbcTemplateObject.update(sql,firstName,lastName,company,phone,email,tz);
+    public void create(String firstName, String lastName, String client, String phone, String email, String tz) {
+        String sql = "insert into person (firstName,lastName,client,phone,email,tz) values (?,?,?,?,?,?)";
+        jdbcTemplateObject.update(sql,firstName,lastName, client,phone,email,tz);
         LOG.info("Added new person [" + firstName + ", " + lastName + "]");
     }
 
@@ -53,8 +53,8 @@ public class PersonDaoImpl implements PersonDao {
         jdbcTemplateObject.update(sql,value);
     }
 
-    public List<Person> getAllByCompany(String companyName){
-        String sql = "SELECT * FROM person WHERE company='" + companyName + "'";
+    public List<Person> getAllByClient(String clientName){
+        String sql = "SELECT * FROM person WHERE client='" + clientName + "'";
         List<Map<String, Object>> rows = jdbcTemplateObject.queryForList(sql);
         return iterateRows(rows);
     }
@@ -65,7 +65,7 @@ public class PersonDaoImpl implements PersonDao {
             Person person = new Person();
             person.setEmail((String) row.get("email"));
             person.setPersonId((Integer) row.get("personId"));
-            person.setCompany((String) row.get("company"));
+            person.setClient((String) row.get("client"));
             person.setCourses((String) row.get("courses"));
             person.setFields((String) row.get("fields"));
             person.setFirstName((String) row.get("firstName"));

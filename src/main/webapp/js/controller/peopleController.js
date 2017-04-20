@@ -29,9 +29,9 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
         $scope.user.lastName = "";
         $scope.user.phone = "";
         $scope.user.email = "";
-        $scope.user.company = "";
+        $scope.user.client = "";
         $scope.user.id = "";
-        $scope.user.zt = "";
+        $scope.user.tz = "";
     };
 
     $scope.cancel = function () {
@@ -48,61 +48,58 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
         )
     };
 
-    $scope.confirmDeletePerson = function (rowId) {
-        $scope.showConfirm($scope, rowId);
-    };
+    $scope.confirmDeletePerson = function () {
 
-    $scope.showConfirm = function($scope, rowId) {
-        $scope.user.id = rowId;
         var confirm = $mdDialog.confirm()
             .title('Are you sure?')
-            .textContent('Record will be deleted permanently.')
-            .ariaLabel('Delete Dialog')
-            .targetEvent(event)
-            .scope($scope)
-            .preserveScope(true)
+            .textContent('Person ' + $scope.user.firstName + ' ' + $scope.user.lastName + ' (' + $scope.user.tz + ') will be deleted permanently')
+            .parent(angular.element(document.body))
+            .clickOutsideToClose(true)
             .ok('Yes')
             .cancel('No');
-        $mdDialog.show(confirm).then(function successCallback(response) {
+
+        $mdDialog.show(confirm).then(function() {
             // delete the person
-            peopleFactory.deletePerson($scope);
+            peopleFactory.deletePerson($scope.user.id);
             // close the dialog
             $scope.cancel();
             // remove form values
             $scope.clearPeopleForm();
+            $scope.showToast("Person was deleted");
         }, function() {
-
+            $scope.showToast("Person was NOT deleted");
+            $scope.clearPeopleForm() ;
         });
     };
 
-    $scope.showPersonInfoDialog = function (rowId) {
+    $scope.getPersonAndPopulateFormFields = function (rowId) {
         $scope.user.id = rowId
         peopleFactory.getPerson(rowId).then( function successCallback(responseData) {
             $scope.user.firstName = responseData.data.firstName;
             $scope.user.lastName = responseData.data.lastName;
-            $scope.user.company = responseData.data.company;
+            $scope.user.client = responseData.data.client;
             $scope.user.phone = responseData.data.phone;
             $scope.user.tz = responseData.data.tz;
             $scope.user.email = responseData.data.email;
+        });
+    };
 
-            $mdDialog.show({
-                controller: DialogController,
-                templateUrl: 'templates/person.info.template.html',
-                parent : angular.element(document.body),
-                clickOutsideToClose : true,
-                scope : $scope,
-                preserveScope : true
-            }).then(
-                function () {},
-                // user clicked cancel
-                function () {
-                    //clear model content
-                    $scope.clearPeopleForm();
-                }
-            );
-        }), function errorCallback(responseData) {
-            $scope.showToast('Unable to retrieve record.')
-        }
+    $scope.showPersonInfoDialog = function (rowId) {
+        $scope.getPersonAndPopulateFormFields(rowId);
+        $mdDialog.show({
+            controller: DialogController,
+            templateUrl: 'templates/person.info.template.html',
+            parent : angular.element(document.body),
+            clickOutsideToClose : true,
+            scope : $scope,
+            preserveScope : true
+        }).then(
+            function () {},
+            // user clicked cancel
+            function () {
+                //clear model content
+            }
+        );
     };
 
     // methods for dialog box

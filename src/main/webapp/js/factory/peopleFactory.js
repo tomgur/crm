@@ -19,7 +19,7 @@ app.factory('peopleFactory', function ($http) {
                 'lastName'  : $scope.user.lastName,
                 'phone'     : $scope.user.phone,
                 'email'     : $scope.user.email,
-                'company'   : $scope.user.company,
+                'client'   : $scope.user.client,
                 'tz'        : $scope.user.tz
             },
             url: 'http://localhost:8080/rest/addPerson'
@@ -33,11 +33,11 @@ app.factory('peopleFactory', function ($http) {
         });
     };
 
-    factory.deletePerson = function ($scope) {
+    factory.deletePerson = function (personId) {
         return $http({
             method  : 'POST',
             data    : {
-                'personId' : $scope.user.id
+                'personId' : personId
             },
             url     : 'http://localhost:8080/rest/deletePerson'
         })

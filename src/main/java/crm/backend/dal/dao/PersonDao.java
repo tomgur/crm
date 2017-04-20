@@ -11,7 +11,7 @@ import java.util.List;
 public interface PersonDao {
     void setDataSource(DataSource dataSource);
 
-    void create(String firstName, String lastName, String company, String phone, String email, String tz);
+    void create(String firstName, String lastName, String client, String phone, String email, String tz);
 
     Person getPerson(String personId);
 
@@ -21,6 +21,6 @@ public interface PersonDao {
 
     void update(String firstName, String lastName, String column, String value);
 
-    List<Person> getAllByCompany(String companyName);
+    List<Person> getAllByClient(String clientName);
 
 }

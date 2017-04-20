@@ -10,7 +10,7 @@ public class Person {
     private int personId;
     private String firstName;
     private String lastName;
-    private String company;
+    private String client;
     private String phone;
     private String email;
     private String fields;
@@ -51,12 +51,12 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public String getCompany() {
-        return company;
+    public String getClient() {
+        return client;
     }
 
-    public void setCompany(String company) {
-        this.company = company;
+    public void setClient(String client) {
+        this.client = client;
     }
 
     public String getPhone() {
@@ -112,7 +112,7 @@ public class Person {
         return "First Name: " + getFirstName() +
                 "\n Last Name: " + getLastName() +
                 "\n Teudat Zehut: " + getTz() +
-                "\n Company: " + getCompany() +
+                "\n Client: " + getClient() +
                 "\n Phone: " + getPhone() +
                 "\n Email: " + getEmail() +
                 "\n Fields: " + getFields() +

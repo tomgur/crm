@@ -1,10 +1,10 @@
 /**
  * Created by gurt on 4/20/2017.
  */
-app.controller('companiesController', ['$scope', 'companiesFactory', '$mdToast', '$mdDialog', function ($scope, companiesFactory, $mdToast, $mdDialog) {
-    $scope.readCompanies = function () {
-        companiesFactory.getCompanies().then(function (responseData) {
-            $scope.companies = responseData.data;
+app.controller('clientsController', ['$scope', 'clientsFactory', '$mdToast', '$mdDialog', function ($scope, clientsFactory, $mdToast, $mdDialog) {
+    $scope.readClients = function () {
+        clientsFactory.getClients().then(function (responseData) {
+            $scope.clients = responseData.data;
         });
     }
     $scope.selectedRowCallback = function (rows) {
@@ -24,5 +24,5 @@ app.controller('companiesController', ['$scope', 'companiesFactory', '$mdToast',
         )
     };
 
-    $scope.readCompanies();
+    $scope.readClients();
 }]);
