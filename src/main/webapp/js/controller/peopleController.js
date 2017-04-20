@@ -3,11 +3,10 @@
  */
 app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdDialog', function ($scope, $mdToast, peopleFactory, $mdDialog) {
     $scope.readPeople = function() {
-        if (!$scope.upToDate) {
-            peopleFactory.getPeople().then(function (responseData) {
-                $scope.people = responseData.data;
-            });
-        }
+        peopleFactory.getPeople().then(function (responseData) {
+            $scope.people = responseData.data;
+        });
+        $scope.title = "People";
     };
 
     $scope.addPerson = function() {
@@ -36,6 +35,16 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
     $scope.cancel = function () {
         $mdDialog.cancel();
     };
+
+    $scope.showRowId = function (rowId) {
+        $mdDialog.show(
+            $mdDialog.alert()
+                .title('Row Clicked!')
+                .textContent('You clicked row # [' + rowId + ']')
+                .ok('Close')
+                .targetEvent(event)
+        )
+    }
 
     $scope.readPeople();
 }])

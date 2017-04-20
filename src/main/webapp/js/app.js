@@ -8,7 +8,7 @@ app.config(function ($mdThemingProvider, $routeProvider) {
         })
         .when("/people", {
             templateUrl: "templates/people.template.html",
-            controller: "peopleController"
+            controller: "peopleController",
         })
         .when("/companies", {
             templateUrl: "templates/companies.template.html",
