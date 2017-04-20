@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,9 +27,9 @@ public class ClientDaoImpl implements ClientDao {
         LOG.info("Client DAO is ready");
     }
 
-    public void create(String name) {
-        String sql = "insert into client (name) values (?)";
-        jdbcTemplateObject.update(sql,name);
+    public void create(String name, String email, String phone, String fax, String address, String contactPerson) {
+        String sql = "insert into client (name,email,phone,fax,address,contactPerson) values (?,?,?,?,?,?)";
+        jdbcTemplateObject.update(sql,name,email,phone,fax,address,contactPerson);
         LOG.info("Added new client [" + name + "]");
     }
 
@@ -58,13 +59,21 @@ public class ClientDaoImpl implements ClientDao {
             client.setEmail((String) row.get("email"));
             client.setFax((String) row.get("fax"));
             client.setPhone((String) row.get("phone"));
-            String[] strings = row.get("invoices").toString().split(",");
+            String[] strings = new String[0];
+            if (row.get("invoices")!=null) {
+                strings = row.get("invoices").toString().split(",");
+            }
             ArrayList<Integer> invoiceIntList = new ArrayList<Integer>();
             for (String s : strings){
                 invoiceIntList.add(Integer.parseInt(s));
             }
             client.setInvoices(invoiceIntList);
-            client.setQuotas(new ArrayList<String>(Arrays.asList(row.get("quotas").toString().split(","))));
+            ArrayList<String> quotasList = new ArrayList<String>();
+            if (row.get("quotas")!=null) {
+                for (String quota : row.get("quotas").toString().split(","))
+                quotasList.add(quota);
+            }
+            client.setQuotas(quotasList);
             clients.add(client);
         }
         return clients;

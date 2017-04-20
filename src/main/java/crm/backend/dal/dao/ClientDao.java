@@ -11,7 +11,7 @@ import java.util.List;
 public interface ClientDao {
     void setDataSource(DataSource dataSource);
 
-    void create(String name);
+    void create(String name, String email, String phone, String fax, String address, String contactPerson);
 
     Client getClient(String name);
 

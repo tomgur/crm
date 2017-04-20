@@ -58,6 +58,15 @@ public class ResstService {
     }
 
     @POST
+    @Path("/addClient")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addClient(String json) {
+        Client client = new Gson().fromJson(json,Client.class);
+        clientDao.create(client.getName(),client.getEmail(),client.getPhone(),client.getFax(),client.getAddress(),client.getContactPerson());
+        return Response.status(Response.Status.OK).entity(json).build();
+    }
+
+    @POST
     @Path("/deletePerson")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response deletePerson(String json) {

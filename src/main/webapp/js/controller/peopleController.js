@@ -113,8 +113,7 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
         $mdToast.show(
             $mdToast.simple()
                 .textContent(message)
-                .hideDelay(3000)
-                .position("top right")
+                .hideDelay(5000)
         );
     }
 

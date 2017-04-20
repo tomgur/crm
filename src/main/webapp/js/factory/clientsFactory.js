@@ -9,7 +9,22 @@ app.factory('clientsFactory', function ($http) {
             method: 'GET',
             url: 'http://localhost:8080/rest/getClients'
         });
-    }
+    };
+
+    factory.addClient = function ($scope) {
+        return $http({
+            method : 'POST',
+            data : {
+                'name'          : $scope.client.name,
+                'email'         : $scope.client.email,
+                'phone'         : $scope.client.phone,
+                'fax'           : $scope.client.fax,
+                'address'       : $scope.client.address,
+                'contactPerson' : $scope.client.contactPerson
+            },
+            url: 'http://localhost:8080/rest/addClient'
+        });
+    };
 
     return factory
 });
