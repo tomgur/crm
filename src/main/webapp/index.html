@@ -1,10 +1,11 @@
-<html lang="en" ng-app="StarterApp">
+<html lang="en" ng-app="crm">
 <head>
     <link rel="stylesheet" href="webjars/angular-material/1.1.3/angular-material.min.css">
     <link rel="stylesheet" href="webjars/github-com-iamisti-mdDataTable/2.2.0/md-data-table-style.css">
     <link rel="stylesheet" href="css/crm.css">
 </head>
-<body layout="row" ng-controller="AppCtrl">
+<body layout="row" ng-controller="mainController">
+<!-- Side Navigation -->
 <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-personId="left"
             md-is-locked-open="$mdMedia('gt-md')">
     <md-toolbar class="md-hue-2">
@@ -39,9 +40,11 @@
     </md-list>
 </md-sidenav>
 <div layout="column" class="relative" layout-fill role="main">
+    <!-- Add Floating Button -->
     <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
         <ng-md-icon icon="add"></ng-md-icon>
     </md-button>
+    <!-- Main Toolbar (+ search and more icons) -->
     <md-toolbar ng-show="!showSearch">
         <div class="md-toolbar-tools">
             <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
@@ -59,6 +62,7 @@
             </md-button>
         </div>
     </md-toolbar>
+    <!-- Main Search Toolbar -->
     <md-toolbar class="md-hue-1" ng-show="showSearch">
         <div class="md-toolbar-tools">
             <md-button ng-click="showSearch = !showSearch" aria-label="Back">
@@ -80,25 +84,34 @@
         </div>
 
     </md-toolbar>
+    <!-- Content (Routed from app.config) -->
     <md-content flex="100" md-scroll-y>
         <div ng-view></div>
     </md-content>
 </div>
+
 <!-- Angular Material Dependencies -->
 <script src="webjars/angular/1.5.8/angular.min.js"></script>
 <script src="webjars/angular-route/1.5.8/angular-route.min.js"></script>
 <script src="webjars/angular-animate/1.5.8/angular-animate.min.js"></script>
 <script src="webjars/angular-aria/1.5.8/angular-aria.min.js"></script>
-
 <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
-
 <script src="webjars/angular-material-icons/0.7.1/angular-material-icons.min.js"></script>
+
+<!-- Media Direct Table Dependencies -->
 <script src="webjars/angular-sanitize/1.5.8/angular-sanitize.min.js"></script>
 <script src="webjars/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
-
 <script src="webjars/github-com-iamisti-mdDataTable/2.2.0/md-data-table-templates.js"></script>
 <script src="webjars/github-com-iamisti-mdDataTable/2.2.0/md-data-table.js"></script>
+
+<!-- Application Dependencies -->
 <script src="js/app.js"></script>
+<script src="js/controller/mainController.js"></script>
+<script src="js/controller/companiesController.js"></script>
+<script src="js/controller/peopleController.js"></script>
+<script src="js/directive/mdtTableDirectives.js"></script>
+<script src="js/factory/companiesFactory.js"></script>
+<script src="js/factory/peopleFactory.js"></script>
 </body>
 </html>
