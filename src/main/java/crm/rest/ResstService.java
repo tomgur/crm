@@ -32,6 +32,14 @@ public class ResstService {
         String s = new Gson().toJson(all);
         return Response.status(200).entity(s).build();
     }
+    @GET
+    @Path("/getPerson")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPerson(@QueryParam("personId") String  personId) {
+        Person person = personDao.getPerson(personId);
+        String s = new Gson().toJson(person);
+        return Response.status(200).entity(s).build();
+    }
 
     @GET
     @Path("/getCompanies")
@@ -49,5 +57,14 @@ public class ResstService {
         Person person = new Gson().fromJson(json,Person.class);
         personDao.create(person.getFirstName(),person.getLastName(),person.getCompany(),person.getPhone(),person.getEmail(),person.getTz());
         return Response.status(Response.Status.OK).entity(json).build();
+    }
+
+    @POST
+    @Path("/deletePerson")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response deletePerson(String json) {
+        Person person = new Gson().fromJson(json,Person.class);
+        personDao.delete(person.getPersonId());
+        return Response.status(Response.Status.OK).entity("Deleted person with ID [" + person.getPersonId() + "]").build();
     }
 }

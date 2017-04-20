@@ -13,9 +13,9 @@ public interface PersonDao {
 
     void create(String firstName, String lastName, String company, String phone, String email, String tz);
 
-    Person getPerson(String firstName, String lastName);
+    Person getPerson(String personId);
 
-    void delete(String name);
+    void delete(int personId);
 
     List<Person> getAll();
 

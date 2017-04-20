@@ -26,5 +26,22 @@ app.factory('peopleFactory', function ($http) {
         });
     };
 
+    factory.getPerson = function (personId) {
+        return $http({
+            method : 'GET',
+            url: 'http://localhost:8080/rest/getPerson?personId=' + personId
+        });
+    };
+
+    factory.deletePerson = function ($scope) {
+        return $http({
+            method  : 'POST',
+            data    : {
+                'personId' : $scope.user.id
+            },
+            url     : 'http://localhost:8080/rest/deletePerson'
+        })
+    }
+
     return factory;
 });

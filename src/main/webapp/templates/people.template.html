@@ -28,10 +28,15 @@
             <mdt-column align-rule="center">Delete</mdt-column>
 
             <mdt-custom-cell column-key="edit" html-content="true">
-                <mdt-custom-cell-edit-button ng-click="clientScope.showRowId( rowId )">test</mdt-custom-cell-edit-button>
+                <mdt-custom-cell-edit-button ng-click="clientScope.showPersonInfoDialog( rowId )">test</mdt-custom-cell-edit-button>
             </mdt-custom-cell>
             <mdt-custom-cell column-key="delete" html-content="true">
-                <mdt-custom-cell-delete-button ng-click="clientScope.showRowId(rowId)">test</mdt-custom-cell-delete-button>
+                <mdt-custom-cell-delete-button ng-click="clientScope.confirmDeletePerson(rowId)">test</mdt-custom-cell-delete-button>
+            </mdt-custom-cell>
+
+            <!-- ID model bind - for delete -->
+            <mdt-custom-cell column-key="personId" ng-hide="true" ng-model="user.id">
+                {{ value }}
             </mdt-custom-cell>
         </mdt-header-row>
     </mdt-table>

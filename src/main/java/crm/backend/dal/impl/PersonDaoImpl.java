@@ -31,13 +31,15 @@ public class PersonDaoImpl implements PersonDao {
         LOG.info("Added new person [" + firstName + ", " + lastName + "]");
     }
 
-    public Person getPerson(String firstName, String lastName) {
-        String sql = "select * from person where firstName=? and lastName=?";
-        return jdbcTemplateObject.queryForObject(sql,new Object[]{firstName,lastName},new PersonMapper());
+    public Person getPerson(String personId) {
+        String sql = "select * from person where personId=?";
+        return jdbcTemplateObject.queryForObject(sql,new Object[]{personId},new PersonMapper());
     }
 
-    public void delete(String name) {
-
+    public void delete(int personId) {
+        String sql = "delete from person where personId=?";
+        jdbcTemplateObject.update(sql,personId);
+        LOG.info("Deleted person with personId [" + personId + "]");
     }
 
     public List<Person> getAll() {

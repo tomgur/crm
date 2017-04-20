@@ -2,15 +2,6 @@
  * Created by gurt on 4/20/2017.
  */
 app.controller('mainController', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdDialog', '$location', function ($scope, $mdBottomSheet, $mdSidenav, $mdDialog, $location) {
-    $scope.showToast = function(message) {
-        $mdToast.show(
-            $mdToast.simple()
-                .textContent(message)
-                .hideDelay(3000)
-                .position("top right")
-        );
-    };
-
     $scope.changePath = function (path, title) {
         $scope.title = title;
         $location.path(path);
@@ -52,8 +43,8 @@ app.controller('mainController', ['$scope', '$mdBottomSheet', '$mdSidenav', '$md
             icon: 'settings'
         }
     ];
-
     $scope.title = "";
+    $scope.user = [];
 
     $scope.showAdd = function (ev) {
         switch ( $scope.title ) {
@@ -61,7 +52,7 @@ app.controller('mainController', ['$scope', '$mdBottomSheet', '$mdSidenav', '$md
                 $scope.showAddPersonDialog(ev)
                 break;
             default :
-                $scope.showToast("Add Button clicked, but no dialog has been written for [' + $scope.title + '] yet...");
+                $scope.showToast("Add Button clicked, but no dialog has been written for [" + $scope.title + "] yet...");
         }
     };
 
@@ -73,7 +64,7 @@ app.controller('mainController', ['$scope', '$mdBottomSheet', '$mdSidenav', '$md
             parent : angular.element(document.body),
             clickOutsideToClose : true,
             scope : $scope,
-            preserveScope : true,
+            preserveScope : true
         });
     }
 }]);
