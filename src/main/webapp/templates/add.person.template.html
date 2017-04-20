@@ -1,0 +1,43 @@
+<md-dialog aria-label="New Person">
+    <md-toolbar class="md-hue-2 md-toolbar-tools">
+        <h3>New Person</h3>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <form name="userForm">
+            <div layout layout-sm="column">
+                <md-input-container flex>
+                    <label>First Name</label>
+                    <input ng-model="user.firstName">
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Last Name</label>
+                    <input ng-model="user.lastName">
+                </md-input-container>
+            </div>
+            <div layout layout-sm="column">
+                <md-input-container flex>
+                    <label>Phone</label>
+                    <input ng-model="user.phone">
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Email</label>
+                    <input ng-model="user.email">
+                </md-input-container>
+            </div>
+            <div layout layout-sm="column">
+                <md-input-container flex>
+                    <label>Company</label>
+                    <input ng-model="user.company">
+                </md-input-container>
+                <md-input-container flex>
+                    <label>ID Number</label>
+                    <input ng-model="user.tz">
+                </md-input-container>
+            </div>
+        </form>
+    </md-content>
+    <md-dialog-actions layout="row"><span flex></span>
+        <md-button ng-click="cancel()"> Cancel</md-button>
+        <md-button ng-click="addPerson()" class="md-primary">Save</md-button>
+    </md-dialog-actions>
+</md-dialog>
