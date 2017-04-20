@@ -25,9 +25,9 @@ public class PersonDaoImpl implements PersonDao {
         LOG.info("Person DAO is ready");
     }
 
-    public void create(String firstName, String lastName) {
-        String sql = "insert into person (firstName,lastName) values (?,?)";
-        jdbcTemplateObject.update(sql,firstName,lastName);
+    public void create(String firstName, String lastName, String company, String phone, String email, String tz) {
+        String sql = "insert into person (firstName,lastName,company,phone,email,tz) values (?,?,?,?,?,?)";
+        jdbcTemplateObject.update(sql,firstName,lastName,company,phone,email,tz);
         LOG.info("Added new person [" + firstName + ", " + lastName + "]");
     }
 

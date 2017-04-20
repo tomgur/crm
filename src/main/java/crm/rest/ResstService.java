@@ -9,9 +9,7 @@ import crm.backend.dal.pojo.Person;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
@@ -42,5 +40,14 @@ public class ResstService {
         List<Company> all = companyDao.getAll();
         String s = new Gson().toJson(all);
         return Response.status(200).entity(s).build();
+    }
+
+    @POST
+    @Path("/addPerson")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addPerson(String json) {
+        Person person = new Gson().fromJson(json,Person.class);
+        personDao.create(person.getFirstName(),person.getLastName(),person.getCompany(),person.getPhone(),person.getEmail(),person.getTz());
+        return Response.status(Response.Status.OK).entity(json).build();
     }
 }
