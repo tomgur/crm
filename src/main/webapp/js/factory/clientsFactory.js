@@ -33,5 +33,15 @@ app.factory('clientsFactory', function ($http) {
         });
     };
 
+    factory.deleteClient = function (id) {
+        return $http({
+            method  : 'POST',
+            data    : {
+                'id' : id
+            },
+            url     : 'http://localhost:8080/rest/deleteClient'
+        })
+    }
+
     return factory
 });

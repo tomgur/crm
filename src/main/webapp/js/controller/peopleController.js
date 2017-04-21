@@ -2,14 +2,28 @@
  * Created by gurt on 4/20/2017.
  */
 app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdDialog', function ($scope, $mdToast, peopleFactory, $mdDialog) {
-    $scope.readPeople = function() {
-        peopleFactory.getPeople().then(function (responseData) {
+    $scope.readPeople = function () {
+        peopleFactory.getPeople().then(function successCallback(responseData) {
             $scope.people = responseData.data;
+        }, function errorCallback(responseData) {
+            $scope.showToast("Something didn't work as expected....");
         });
         $scope.title = "People";
     };
 
-    $scope.addPerson = function() {
+    $scope.showAddPersonDialog = function (ev) {
+        $mdDialog.show({
+            controller: 'peopleController',
+            templateUrl: 'templates/add.person.template.html',
+            targetEvent: ev,
+            parent : angular.element(document.body),
+            clickOutsideToClose : true,
+            scope : $scope,
+            preserveScope : true
+        });
+    };
+
+    $scope.addPerson = function () {
         peopleFactory.addPerson($scope).then(function successCallback(response) {
             // tell the user new product was created
             // $scope.showToast(response.data);
@@ -17,14 +31,15 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
             // close the dialog
             $scope.cancel();
 
+            $scope.readPeople();
             // remove form values
             $scope.clearPeopleForm();
-        }, function errorCallback (response) {
+        }, function errorCallback(response) {
             $scope.showToast("Unable to create record.");
         });
     }
 
-    $scope.clearPeopleForm = function() {
+    $scope.clearPeopleForm = function () {
         $scope.user.firstName = "";
         $scope.user.lastName = "";
         $scope.user.phone = "";
@@ -58,7 +73,7 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
             .ok('Yes')
             .cancel('No');
 
-        $mdDialog.show(confirm).then(function() {
+        $mdDialog.show(confirm).then(function () {
             // delete the person
             peopleFactory.deletePerson($scope.user.id);
             // close the dialog
@@ -66,15 +81,17 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
             // remove form values
             $scope.clearPeopleForm();
             $scope.showToast("Person was deleted");
-        }, function() {
+            $scope.people = null;
+            $scope.readPeople();
+        }, function () {
             $scope.showToast("Person was NOT deleted");
-            $scope.clearPeopleForm() ;
+            $scope.clearPeopleForm();
         });
     };
 
     $scope.getPersonAndPopulateFormFields = function (rowId) {
         $scope.user.id = rowId;
-        peopleFactory.getPerson(rowId).then( function successCallback(responseData) {
+        peopleFactory.getPerson(rowId).then(function successCallback(responseData) {
             $scope.user.firstName = responseData.data.firstName;
             $scope.user.lastName = responseData.data.lastName;
             $scope.user.client = responseData.data.client;
@@ -87,26 +104,19 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
     $scope.showPersonInfoDialog = function (rowId) {
         $scope.getPersonAndPopulateFormFields(rowId);
         $mdDialog.show({
-            controller: DialogController,
+            controller: 'peopleController',
             templateUrl: 'templates/person.info.template.html',
-            parent : angular.element(document.body),
-            clickOutsideToClose : true,
-            scope : $scope,
-            preserveScope : true
-        }).then(
-            function () {},
-            // user clicked cancel
-            function () {
-                //clear model content
-            }
-        );
+            parent: angular.element(document.body),
+            clickOutsideToClose: true,
+            scope: $scope,
+            preserveScope: true
+        });
     };
 
     // methods for dialog box
-    function DialogController($scope, $mdDialog) {
-        $scope.cancel = function () {
-            $mdDialog.cancel();
-        };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+        $scope.clearPeopleForm();
     };
 
     $scope.showToast = function (message) {

@@ -30,10 +30,11 @@ public class ResstService {
         String s = new Gson().toJson(all);
         return Response.status(200).entity(s).build();
     }
+
     @GET
     @Path("/getPerson")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPerson(@QueryParam("personId") String  personId) {
+    public Response getPerson(@QueryParam("personId") String personId) {
         Person person = personDao.getPerson(personId);
         String s = new Gson().toJson(person);
         return Response.status(200).entity(s).build();
@@ -42,7 +43,7 @@ public class ResstService {
     @GET
     @Path("/getClient")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getClient(@QueryParam("id") String  id) {
+    public Response getClient(@QueryParam("id") String id) {
         Client client = clientDao.getClient(id);
         String s = new Gson().toJson(client);
         return Response.status(200).entity(s).build();
@@ -61,8 +62,8 @@ public class ResstService {
     @Path("/addPerson")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addPerson(String json) {
-        Person person = new Gson().fromJson(json,Person.class);
-        personDao.create(person.getFirstName(),person.getLastName(),person.getClient(),person.getPhone(),person.getEmail(),person.getTz());
+        Person person = new Gson().fromJson(json, Person.class);
+        personDao.create(person.getFirstName(), person.getLastName(), person.getClient(), person.getPhone(), person.getEmail(), person.getTz());
         return Response.status(Response.Status.OK).entity(json).build();
     }
 
@@ -70,8 +71,8 @@ public class ResstService {
     @Path("/addClient")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addClient(String json) {
-        Client client = new Gson().fromJson(json,Client.class);
-        clientDao.create(client.getName(),client.getEmail(),client.getPhone(),client.getFax(),client.getAddress(),client.getContactPerson());
+        Client client = new Gson().fromJson(json, Client.class);
+        clientDao.create(client.getName(), client.getEmail(), client.getPhone(), client.getFax(), client.getAddress(), client.getContactPerson());
         return Response.status(Response.Status.OK).entity(json).build();
     }
 
@@ -79,8 +80,17 @@ public class ResstService {
     @Path("/deletePerson")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response deletePerson(String json) {
-        Person person = new Gson().fromJson(json,Person.class);
+        Person person = new Gson().fromJson(json, Person.class);
         personDao.delete(person.getPersonId());
         return Response.status(Response.Status.OK).entity("Deleted person with ID [" + person.getPersonId() + "]").build();
+    }
+
+    @POST
+    @Path("/deleteClient")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response deleteClient(String json) {
+        Client client = new Gson().fromJson(json, Client.class);
+        clientDao.delete(String.valueOf(client.getId()));
+        return Response.status(Response.Status.OK).entity("Deleted client with ID [" + client.getId() + "]").build();
     }
 }

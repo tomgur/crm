@@ -13,7 +13,7 @@
     <mdt-table animate-sort-icon="true"
                paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,100]}"
                mdt-row="{
-                         'data' : filteredPeople,
+                         'data' : people,
                          'table-row-id-key' : 'personId',
                          'column-keys' : ['firstName','lastName','client','phone','email','tz','edit']}">
 
@@ -36,4 +36,8 @@
             </mdt-custom-cell>
         </mdt-header-row>
     </mdt-table>
+
+    <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAddPersonDialog($event)">
+        <ng-md-icon icon="add"></ng-md-icon>
+    </md-button>
 </div>

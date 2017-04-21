@@ -58,41 +58,7 @@ app.controller('mainController', ['$scope', '$mdBottomSheet', '$mdSidenav', '$md
     $scope.user = [];
     $scope.client = [];
 
-    $scope.showAdd = function (ev) {
-        switch ( $scope.title ) {
-            case "People" :
-                $scope.showAddPersonDialog(ev)
-                break;
-            case "Clients" :
-                $scope.showAddClientDialog(ev)
-                break;
-            default :
-                $scope.showToast("Add Button clicked, but no dialog has been written for [" + $scope.title + "] yet...");
-        }
-    };
 
-    $scope.showAddPersonDialog = function (ev) {
-        $mdDialog.show({
-            controller: 'peopleController',
-            templateUrl: 'templates/add.person.template.html',
-            targetEvent: ev,
-            parent : angular.element(document.body),
-            clickOutsideToClose : true,
-            scope : $scope,
-            preserveScope : true
-        });
-    };
-    $scope.showAddClientDialog = function (ev) {
-        $mdDialog.show({
-            controller: 'clientsController',
-            templateUrl: 'templates/add.client.template.html',
-            targetEvent: ev,
-            parent : angular.element(document.body),
-            clickOutsideToClose : true,
-            scope : $scope,
-            preserveScope : true
-        });
-    };
     $scope.showToast = function (message) {
         $mdToast.show(
             $mdToast.simple()

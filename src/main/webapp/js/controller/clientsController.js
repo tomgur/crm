@@ -6,22 +6,18 @@ app.controller('clientsController', ['$scope', 'clientsFactory', '$mdToast', '$m
         clientsFactory.getClients().then(function (responseData) {
             $scope.clients = responseData.data;
         });
-    }
-    $scope.selectedRowCallback = function (rows) {
-        $mdToast.show(
-            $mdToast.simple()
-                .content('Selected row id(s): ' + rows)
-                .hideDelay(3000)
-        );
     };
-    $scope.showRowId = function(rowId) {
-        $mdDialog.show(
-            $mdDialog.alert()
-                .clickOutsideToClose(true)
-                .textContent(rowId)
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Got it!')
-        )
+
+    $scope.showAddClientDialog = function (ev) {
+        $mdDialog.show({
+            controller : 'clientsController',
+            templateUrl: 'templates/add.client.template.html',
+            targetEvent: ev,
+            parent : angular.element(document.body),
+            clickOutsideToClose : true,
+            scope : $scope,
+            preserveScope : true
+        });
     };
 
     $scope.addClient = function() {
@@ -34,6 +30,9 @@ app.controller('clientsController', ['$scope', 'clientsFactory', '$mdToast', '$m
 
             // remove form values
             $scope.clearClientsForm();
+
+            //refresh the table
+            $scope.readClients()
         }, function errorCallback (response) {
             $scope.showToast("Unable to create record.");
         });
@@ -52,28 +51,47 @@ app.controller('clientsController', ['$scope', 'clientsFactory', '$mdToast', '$m
     };
 
     // methods for dialog box
-    function DialogController($scope, $mdDialog) {
-        $scope.cancel = function () {
-            $mdDialog.cancel();
-        };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+        $scope.clearClientsForm();
     };
 
     $scope.showClientInfoDialog = function (rowId) {
         $scope.getClientAndPopulateFormFields(rowId);
         $mdDialog.show({
-            controller: DialogController,
+            controller: 'clientsController',
             templateUrl: 'templates/client.info.template.html',
             parent : angular.element(document.body),
             clickOutsideToClose : true,
             scope : $scope,
             preserveScope : true
-        }).then(
-            function () {},
-            // user clicked cancel
-            function () {
-                //clear model content
-            }
-        );
+        });
+    };
+
+    $scope.confirmDeleteClient = function () {
+
+        var confirm = $mdDialog.confirm()
+            .title('Are you sure?')
+            .textContent('Client ' + $scope.client.name + ' will be deleted permanently')
+            .parent(angular.element(document.body))
+            .clickOutsideToClose(true)
+            .ok('Yes')
+            .cancel('No');
+
+        $mdDialog.show(confirm).then(function () {
+            // delete the client
+            clientsFactory.deleteClient($scope.client.id);
+            // close the dialog
+            $scope.cancel();
+            // remove form values
+            $scope.clearClientsForm();
+            $scope.showToast("Client was deleted");
+            $scope.clients = null;
+            $scope.readClients();
+        }, function () {
+            $scope.showToast("Client was NOT deleted");
+            $scope.clearClientsForm();
+        });
     };
 
     $scope.clearClientsForm = function() {
@@ -92,12 +110,6 @@ app.controller('clientsController', ['$scope', 'clientsFactory', '$mdToast', '$m
                 .hideDelay(5000)
         );
     }
-
-    // cancel for new Client dialog
-    $scope.cancel = function () {
-        $mdDialog.cancel();
-    };
-
 
     $scope.readClients();
 }]);

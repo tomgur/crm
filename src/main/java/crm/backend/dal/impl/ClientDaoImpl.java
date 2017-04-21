@@ -38,8 +38,9 @@ public class ClientDaoImpl implements ClientDao {
         return jdbcTemplateObject.queryForObject(sql,new Object[]{id},new ClientMapper());
     }
 
-    public void delete(String name) {
-
+    public void delete(String id) {
+        String sql = "delete from client where id=?";
+        jdbcTemplateObject.update(sql,id);
     }
 
     public List<Client> getAll() {
