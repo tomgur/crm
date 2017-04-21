@@ -37,7 +37,44 @@ app.controller('clientsController', ['$scope', 'clientsFactory', '$mdToast', '$m
         }, function errorCallback (response) {
             $scope.showToast("Unable to create record.");
         });
-    }
+    };
+
+    $scope.getClientAndPopulateFormFields = function (rowId) {
+        $scope.client.id = rowId;
+        clientsFactory.getClient(rowId).then( function successCallback(responseData) {
+            $scope.client.name = responseData.data.name;
+            $scope.client.email = responseData.data.email;
+            $scope.client.phone = responseData.data.phone;
+            $scope.client.fax = responseData.data.fax;
+            $scope.client.address = responseData.data.address;
+            $scope.client.contactPerson = responseData.data.contactPerson;
+        });
+    };
+
+    // methods for dialog box
+    function DialogController($scope, $mdDialog) {
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+    };
+
+    $scope.showClientInfoDialog = function (rowId) {
+        $scope.getClientAndPopulateFormFields(rowId);
+        $mdDialog.show({
+            controller: DialogController,
+            templateUrl: 'templates/client.info.template.html',
+            parent : angular.element(document.body),
+            clickOutsideToClose : true,
+            scope : $scope,
+            preserveScope : true
+        }).then(
+            function () {},
+            // user clicked cancel
+            function () {
+                //clear model content
+            }
+        );
+    };
 
     $scope.clearClientsForm = function() {
         $scope.client.name = "";

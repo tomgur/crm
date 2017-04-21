@@ -13,7 +13,7 @@ public interface ClientDao {
 
     void create(String name, String email, String phone, String fax, String address, String contactPerson);
 
-    Client getClient(String name);
+    Client getClient(String id);
 
     void delete(String name);
 

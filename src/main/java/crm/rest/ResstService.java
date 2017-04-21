@@ -40,6 +40,15 @@ public class ResstService {
     }
 
     @GET
+    @Path("/getClient")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getClient(@QueryParam("id") String  id) {
+        Client client = clientDao.getClient(id);
+        String s = new Gson().toJson(client);
+        return Response.status(200).entity(s).build();
+    }
+
+    @GET
     @Path("/getClients")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllClients() {

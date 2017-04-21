@@ -33,9 +33,9 @@ public class ClientDaoImpl implements ClientDao {
         LOG.info("Added new client [" + name + "]");
     }
 
-    public Client getClient(String name) {
-        String sql = "select * from client where name=?";
-        return jdbcTemplateObject.queryForObject(sql,new Object[]{name},new ClientMapper());
+    public Client getClient(String id) {
+        String sql = "select * from client where id=?";
+        return jdbcTemplateObject.queryForObject(sql,new Object[]{id},new ClientMapper());
     }
 
     public void delete(String name) {

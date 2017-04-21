@@ -26,5 +26,12 @@ app.factory('clientsFactory', function ($http) {
         });
     };
 
+    factory.getClient = function (id) {
+        return $http({
+            method  : 'GET',
+            url     : 'http://localhost:8080/rest/getClient?id=' + id
+        });
+    };
+
     return factory
 });

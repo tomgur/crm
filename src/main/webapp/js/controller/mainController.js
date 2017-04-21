@@ -56,6 +56,7 @@ app.controller('mainController', ['$scope', '$mdBottomSheet', '$mdSidenav', '$md
     ];
     $scope.title = "";
     $scope.user = [];
+    $scope.client = [];
 
     $scope.showAdd = function (ev) {
         switch ( $scope.title ) {

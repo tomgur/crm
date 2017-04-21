@@ -73,7 +73,7 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
     };
 
     $scope.getPersonAndPopulateFormFields = function (rowId) {
-        $scope.user.id = rowId
+        $scope.user.id = rowId;
         peopleFactory.getPerson(rowId).then( function successCallback(responseData) {
             $scope.user.firstName = responseData.data.firstName;
             $scope.user.lastName = responseData.data.lastName;

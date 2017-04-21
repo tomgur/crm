@@ -14,7 +14,7 @@
                paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,100]}"
                mdt-row="{'data': filteredClients,
                'table-row-id-key': 'id',
-               'column-keys': ['name', 'address', 'phone', 'fax', 'email', 'contactPerson', 'invoices', 'quotas', 'edit', 'delete']}">
+               'column-keys': ['name', 'address', 'phone', 'fax', 'email', 'contactPerson', 'invoices', 'quotas', 'edit']}">
 
         <mdt-header-row>
             <mdt-column column-sort="true">Name</mdt-column>
@@ -26,16 +26,17 @@
             <mdt-column>Invoices</mdt-column>
             <mdt-column>Quotas</mdt-column>
             <mdt-column align-rule="center">Edit</mdt-column>
-            <mdt-column align-rule="center">Delete</mdt-column>
 
             <mdt-custom-cell column-key="edit" html-content="true">
-                <mdt-custom-cell-edit-button ng-click="clientScope.showRowId( rowId )">test</mdt-custom-cell-edit-button>
-            </mdt-custom-cell>
-            <mdt-custom-cell column-key="delete" html-content="true">
-                <mdt-custom-cell-delete-button ng-click="clientScope.showRowId(rowId)">test</mdt-custom-cell-delete-button>
+                <mdt-custom-cell-edit-button ng-click="clientScope.showClientInfoDialog( rowId )"></mdt-custom-cell-edit-button>
             </mdt-custom-cell>
             <mdt-custom-cell column-key="invoices">{{value}}</mdt-custom-cell>
             <mdt-custom-cell column-key="quotas">{{value}}</mdt-custom-cell>
+
+            <!-- ID model bind - for delete -->
+            <mdt-custom-cell column-key="id" ng-hide="true" ng-model="client.id">
+                {{ value }}
+            </mdt-custom-cell>
         </mdt-header-row>
     </mdt-table>
 </div>
