@@ -6,10 +6,11 @@
 </head>
 <body layout="row" ng-controller="mainController">
 <!-- Side Navigation -->
-<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-personId="left"
+<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left"
             md-is-locked-open="$mdMedia('gt-md')">
-    <md-toolbar class="md-hue-2">
-        <span flex></span>
+    <md-toolbar style="background-color:#AAAAAA;">
+        <!-- TODO: CHANGE IMAGE!!! -->
+        <img ng-src="images/logo.png" height="50">
     </md-toolbar>
     <md-list>
         <md-list-item ng-repeat="item in menu" ng-click="changePath(item.link, item.title)">
