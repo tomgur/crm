@@ -1,4 +1,4 @@
-var app = angular.module("crm", ["ngRoute", "ngMaterial", "ngMdIcons", "ngSanitize", "mdDataTable", "ngMdIcons"]);
+var app = angular.module("crm", ["ngRoute", "ngMaterial", "ngMdIcons", "ngSanitize", "mdDataTable", "ngMdIcons", 'mwl.calendar', 'ui.bootstrap']);
 
 app.config(function ($mdThemingProvider, $routeProvider) {
     // Routing
@@ -13,6 +13,10 @@ app.config(function ($mdThemingProvider, $routeProvider) {
         .when("/clients", {
             templateUrl: "templates/clients.template.html",
             controller: "clientsController"
+        })
+        .when("/calendar", {
+            templateUrl: "templates/calendar.template.html",
+            controller: "calendarController"
         })
 
     // Color theme

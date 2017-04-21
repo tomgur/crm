@@ -2,6 +2,7 @@
 <head>
     <link rel="stylesheet" href="webjars/angular-material/1.1.3/angular-material.min.css">
     <link rel="stylesheet" href="webjars/github-com-iamisti-mdDataTable/2.2.0/md-data-table-style.css">
+    <link href="webjars/angular-bootstrap-calendar/0.14.2/dist/css/angular-bootstrap-calendar.min.css" rel="stylesheet">
 </head>
 <body layout="row" ng-controller="mainController">
 <!-- Side Navigation -->
@@ -104,11 +105,17 @@
 <script src="webjars/github-com-iamisti-mdDataTable/2.2.0/md-data-table-templates.js"></script>
 <script src="webjars/github-com-iamisti-mdDataTable/2.2.0/md-data-table.js"></script>
 
+<!-- UI-calendar dependencies -->
+<script type="text/javascript" src="webjars/moment/2.18.1/min/moment.min.js"></script>
+<script src="webjars/angular-bootstrap-calendar/0.14.2/dist/js/angular-bootstrap-calendar-tpls.min.js"></script>
+<script src="webjars/angular-ui-bootstrap/2.2.0/ui-bootstrap.min.js"></script>
+
 <!-- Application Dependencies -->
 <script src="js/app.js"></script>
 <script src="js/controller/mainController.js"></script>
 <script src="js/controller/clientsController.js"></script>
 <script src="js/controller/peopleController.js"></script>
+<script src="js/controller/calendarController.js"></script>
 <script src="js/directive/mdtTableDirectives.js"></script>
 <script src="js/factory/clientsFactory.js"></script>
 <script src="js/factory/peopleFactory.js"></script>
