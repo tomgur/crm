@@ -29,7 +29,6 @@ public class Main {
 //        clientDao.update("HPE","fax","035399998");
 //        Client hpe = clientDao.getClient("HPE");
 //        System.out.println(hpe.toString());
-        personDao.update("Tom", "Gur","phone","0507448140");
 //        List<Person> hpePeople = personDao.getAll();
 //        for(Person p : hpePeople) {
 //            System.out.println(p.toString());

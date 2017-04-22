@@ -19,10 +19,26 @@ app.factory('peopleFactory', function ($http) {
                 'lastName'  : $scope.user.lastName,
                 'phone'     : $scope.user.phone,
                 'email'     : $scope.user.email,
-                'client'   : $scope.user.client,
+                'client'    : $scope.user.client,
                 'tz'        : $scope.user.tz
             },
             url: 'http://localhost:8080/rest/addPerson'
+        });
+    };
+
+    factory.updatePerson = function ($scope) {
+        return $http({
+            method : 'POST',
+            data : {
+                'personId':$scope.user.id,
+                'firstName':$scope.user.firstName,
+                'lastName':$scope.user.lastName,
+                'phone':$scope.user.phone,
+                'email':$scope.user.email,
+                'client':$scope.user.client,
+                'tz':$scope.user.tz
+            },
+            url : 'http://localhost:8080/rest/updatePerson'
         });
     };
 
@@ -40,8 +56,8 @@ app.factory('peopleFactory', function ($http) {
                 'personId' : personId
             },
             url     : 'http://localhost:8080/rest/deletePerson'
-        })
-    }
+        });
+    };
 
     return factory;
 });

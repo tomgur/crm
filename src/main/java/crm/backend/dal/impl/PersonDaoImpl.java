@@ -48,11 +48,6 @@ public class PersonDaoImpl implements PersonDao {
         return iterateRows(rows);
     }
 
-    public void update(String firstName, String lastName, String column, String value) {
-        String sql = "UPDATE person SET " + column + "=" + "? WHERE firstName='" + firstName + "' AND lastName='" + lastName + "'";
-        jdbcTemplateObject.update(sql,value);
-    }
-
     public List<Person> getAllByClient(String clientName){
         String sql = "SELECT * FROM person WHERE client='" + clientName + "'";
         List<Map<String, Object>> rows = jdbcTemplateObject.queryForList(sql);
@@ -77,5 +72,10 @@ public class PersonDaoImpl implements PersonDao {
             people.add(person);
         }
         return people;
+    }
+
+    public void update(Person person) {
+        String sql = "UPDATE person SET  email=?, client=?, firstName=?, lastName=?, phone=?,tz=? WHERE personId =?";
+        jdbcTemplateObject.update(sql, person.getEmail(),person.getClient(),person.getFirstName(),person.getLastName(),person.getPhone(),person.getTz(),person.getPersonId());
     }
 }

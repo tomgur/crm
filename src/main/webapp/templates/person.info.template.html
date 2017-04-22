@@ -1,6 +1,6 @@
 <md-dialog aria-label="Person Info">
     <md-toolbar class="md-hue-2 md-toolbar-tools">
-        <h2>{{ user.firstName}} {{ user.lastName }} ( {{ user.tz }} )</h2>
+        <h2>{{ user.firstName}} {{ user.lastName }} - {{ user.tz }} </h2>
     </md-toolbar>
     <md-content class="md-padding">
         <form name="userForm">
@@ -40,6 +40,6 @@
         <md-button class="md-warn" ng-click="confirmDeletePerson()">Delete</md-button>
         <span flex></span>
         <md-button ng-click="cancel()">Cancel</md-button>
-        <md-button class="md-primary">Update</md-button>
+        <md-button class="md-primary" ng-click="updatePerson()">Update</md-button>
     </md-dialog-actions>
 </md-dialog>

@@ -3,12 +3,9 @@ var app = angular.module("crm", ["ngRoute", "ngMaterial", "ngMdIcons", "ngSaniti
 app.config(function ($mdThemingProvider, $routeProvider) {
     // Routing
     $routeProvider
-        .when("/", {
-            templateUrl: "templates/main.html"
-        })
         .when("/people", {
             templateUrl: "templates/people.template.html",
-            controller: "peopleController",
+            controller: "peopleController"
         })
         .when("/clients", {
             templateUrl: "templates/clients.template.html",
@@ -18,6 +15,10 @@ app.config(function ($mdThemingProvider, $routeProvider) {
             templateUrl: "templates/calendar.template.html",
             controller: "calendarController"
         })
+        .otherwise({
+            templateUrl: "templates/calendar.template.html",
+            controller: "calendarController"
+        });
 
     // Color theme
     $mdThemingProvider.theme('default')

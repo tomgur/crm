@@ -49,10 +49,6 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
         $scope.user.tz = "";
     };
 
-    $scope.cancel = function () {
-        $mdDialog.cancel();
-    };
-
     $scope.showRowId = function (rowId) {
         $mdDialog.show(
             $mdDialog.alert()
@@ -63,27 +59,28 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
         )
     };
 
-    $scope.confirmDeletePerson = function () {
+    $scope.confirmDeletePerson = function (event) {
 
         var confirm = $mdDialog.confirm()
             .title('Are you sure?')
-            .textContent('Person ' + $scope.user.firstName + ' ' + $scope.user.lastName + ' (' + $scope.user.tz + ') will be deleted permanently')
+            .textContent('Person [ ' + $scope.user.firstName + ' ' + $scope.user.lastName + ' - ' + $scope.user.tz + ' ] will be deleted permanently')
             .parent(angular.element(document.body))
+            .targetEvent(event)
             .clickOutsideToClose(true)
             .ok('Yes')
             .cancel('No');
 
-        $mdDialog.show(confirm).then(function () {
+        $mdDialog.show(confirm).then(function() {
             // delete the person
-            peopleFactory.deletePerson($scope.user.id);
-            // close the dialog
-            $scope.cancel();
-            // remove form values
-            $scope.clearPeopleForm();
-            $scope.showToast("Person was deleted");
-            $scope.people = null;
-            $scope.readPeople();
-        }, function () {
+            peopleFactory.deletePerson($scope.user.id).then(function successCallback() {
+                $scope.showToast("Person [" + $scope.user.firstName + " " + $scope.user.lastName + "] was deleted successfully");
+                // close the dialog
+                $scope.cancel();
+                // remove form values
+                $scope.clearPeopleForm();
+                $scope.readPeople();
+            });
+        }, function() {
             $scope.showToast("Person was NOT deleted");
             $scope.clearPeopleForm();
         });
@@ -110,6 +107,17 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
             clickOutsideToClose: true,
             scope: $scope,
             preserveScope: true
+        });
+    };
+
+    $scope.updatePerson = function () {
+        peopleFactory.updatePerson($scope).then(function successCallback() {
+            $scope.showToast("Updated person [" + $scope.user.firstName + " " + $scope.user.lastName + "]");
+            $scope.cancel();
+            $scope.clearPeopleForm();
+            $scope.readPeople();
+        }, function errorCallback() {
+            $scope.showToast("Unable to update record");
         });
     };
 

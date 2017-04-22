@@ -11,7 +11,8 @@
     </md-card>
 
     <mdt-table animate-sort-icon="true"
-               paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,100]}"
+               paginated-rows="{isEnabled: true, rowsPerPageValues: [20]}"
+               ripple-effect="true"
                mdt-row="{'data': filteredClients,
                'table-row-id-key': 'id',
                'column-keys': ['name', 'address', 'phone', 'fax', 'email', 'contactPerson', 'invoices', 'quotas', 'edit']}">

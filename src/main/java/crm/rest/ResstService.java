@@ -82,7 +82,7 @@ public class ResstService {
     public Response deletePerson(String json) {
         Person person = new Gson().fromJson(json, Person.class);
         personDao.delete(person.getPersonId());
-        return Response.status(Response.Status.OK).entity("Deleted person with ID [" + person.getPersonId() + "]").build();
+        return Response.status(Response.Status.OK).entity(json).build();
     }
 
     @POST
@@ -92,5 +92,14 @@ public class ResstService {
         Client client = new Gson().fromJson(json, Client.class);
         clientDao.delete(String.valueOf(client.getId()));
         return Response.status(Response.Status.OK).entity("Deleted client with ID [" + client.getId() + "]").build();
+    }
+
+    @POST
+    @Path("/updatePerson")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updatePerson(String json) {
+        Person person = new Gson().fromJson(json, Person.class);
+        personDao.update(person);
+        return Response.status(Response.Status.OK).entity(person).build();
     }
 }

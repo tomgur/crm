@@ -8,7 +8,7 @@
 <!-- Side Navigation -->
 <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left"
             md-is-locked-open="$mdMedia('gt-md')">
-    <md-toolbar style="background-color:white;">
+    <md-toolbar class="md-hue-1">
         <!-- TODO: CHANGE IMAGE!!! -->
         <img ng-src="images/logo.png" height="50">
     </md-toolbar>
@@ -18,7 +18,7 @@
                 <md-item-content md-ink-ripple layout="row"
                                  layout-align="start center">
                     <div class="inset">
-                        <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                        <ng-md-icon class="md-hue-1" icon="{{item.icon}}"></ng-md-icon>
                     </div>
                     <div class="inset">{{item.title}}
                     </div>
@@ -31,7 +31,7 @@
             <a>
                 <md-item-content md-ink-ripple layout="row" layout-align="start center">
                     <div class="inset">
-                        <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                        <ng-md-icon icon="{{item.icon}}" class="md-default-theme"></ng-md-icon>
                     </div>
                     <div class="inset">{{item.title}}
                     </div>

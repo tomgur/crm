@@ -19,8 +19,7 @@ public interface PersonDao {
 
     List<Person> getAll();
 
-    void update(String firstName, String lastName, String column, String value);
-
     List<Person> getAllByClient(String clientName);
 
+    void update(Person person);
 }

@@ -57,13 +57,4 @@ app.controller('mainController', ['$scope', '$mdBottomSheet', '$mdSidenav', '$md
     $scope.title = "";
     $scope.user = [];
     $scope.client = [];
-
-
-    $scope.showToast = function (message) {
-        $mdToast.show(
-            $mdToast.simple()
-                .textContent(message)
-                .hideDelay(5000)
-        );
-    }
 }]);
