@@ -41,7 +41,23 @@ app.factory('clientsFactory', function ($http) {
             },
             url     : 'http://localhost:8080/rest/deleteClient'
         })
-    }
+    };
+    
+    factory.updateClient = function ($scope) {
+        return $http({
+            method : 'POST',
+            data : {
+                'id'            : $scope.client.id,
+                'name'          : $scope.client.name,
+                'email'         : $scope.client.email,
+                'phone'         : $scope.client.phone,
+                'fax'           : $scope.client.fax,
+                'address'       : $scope.client.address,
+                'contactPerson' : $scope.client.contactPerson
+            },
+            url: 'http://localhost:8080/rest/updateClient'
+        });
+    };
 
     return factory
 });

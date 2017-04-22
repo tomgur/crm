@@ -117,7 +117,7 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
             $scope.clearPeopleForm();
             $scope.readPeople();
         }, function errorCallback() {
-            $scope.showToast("Unable to update record");
+            $scope.showToast("Unable to update person record");
         });
     };
 

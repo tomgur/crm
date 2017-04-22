@@ -80,8 +80,8 @@ public class ClientDaoImpl implements ClientDao {
         return clients;
     }
 
-    public void update(String name, String column, String value) {
-        String sql = "UPDATE client SET " + column + "=" + "? WHERE name='" + name + "'";
-        jdbcTemplateObject.update(sql,value);
+    public void update(Client client) {
+        String sql = "UPDATE client SET phone = ?, name = ?, address = ?, contactPerson = ?, email = ?, fax = ?, invoices = ?, quotas = ? WHERE id = ?";
+        jdbcTemplateObject.update(sql,client.getPhone(), client.getName(), client.getAddress(), client.getContactPerson(), client.getEmail(), client.getFax(), client.getInvoices(), client.getQuotas(), client.getId());
     }
 }

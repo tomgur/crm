@@ -19,6 +19,6 @@ public interface ClientDao {
 
     List<Client> getAll();
 
-    void update(String name, String column, String value);
+    void update(Client client);
 
 }

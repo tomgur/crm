@@ -100,6 +100,15 @@ public class ResstService {
     public Response updatePerson(String json) {
         Person person = new Gson().fromJson(json, Person.class);
         personDao.update(person);
-        return Response.status(Response.Status.OK).entity(person).build();
+        return Response.status(Response.Status.OK).entity(json).build();
+    }
+
+    @POST
+    @Path("/updateClient")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateClient(String json) {
+        Client client = new Gson().fromJson(json, Client.class);
+        clientDao.update(client);
+        return Response.status(Response.Status.OK).entity(json).build();
     }
 }

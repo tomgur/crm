@@ -94,6 +94,18 @@ app.controller('clientsController', ['$scope', 'clientsFactory', '$mdToast', '$m
         });
     };
 
+    $scope.updateClient = function () {
+        clientsFactory.updateClient($scope).then(function successCallback() {
+            $scope.showToast("Updated client [" + $scope.client.name + "]");
+            $scope.cancel();
+            $scope.clearClientsForm();
+            $scope.readClients();
+        }, function errorCallback() {
+            $scope.showToast("Unable to update client record");
+        });
+    };
+
+
     $scope.clearClientsForm = function() {
         $scope.client.name = "";
         $scope.client.email = "";
