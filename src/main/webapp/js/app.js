@@ -1,4 +1,4 @@
-var app = angular.module("crm", ["ngRoute", "ngMaterial", "ngMdIcons", "ngSanitize", "mdDataTable", "ngMdIcons", 'mwl.calendar', 'ui.bootstrap']);
+var app = angular.module("crm", ["ngRoute", "ngMaterial", "ngMdIcons", "ngSanitize", "mdDataTable", "ngMdIcons", 'mwl.calendar', 'ui.bootstrap', 'uiCropper']);
 
 app.config(function ($mdThemingProvider, $routeProvider) {
     // Routing

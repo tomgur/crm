@@ -20,7 +20,8 @@ app.factory('peopleFactory', function ($http) {
                 'phone'     : $scope.user.phone,
                 'email'     : $scope.user.email,
                 'client'    : $scope.user.client,
-                'tz'        : $scope.user.tz
+                'tz'        : $scope.user.tz,
+                'imageBlob' : $scope.myCroppedImage
             },
             url: 'http://localhost:8080/rest/addPerson'
         });
@@ -30,13 +31,14 @@ app.factory('peopleFactory', function ($http) {
         return $http({
             method : 'POST',
             data : {
-                'personId'  :$scope.user.id,
-                'firstName' :$scope.user.firstName,
-                'lastName'  :$scope.user.lastName,
-                'phone'     :$scope.user.phone,
-                'email'     :$scope.user.email,
-                'client'    :$scope.user.client,
-                'tz'        :$scope.user.tz
+                'personId'  : $scope.user.id,
+                'firstName' : $scope.user.firstName,
+                'lastName'  : $scope.user.lastName,
+                'phone'     : $scope.user.phone,
+                'email'     : $scope.user.email,
+                'client'    : $scope.user.client,
+                'tz'        : $scope.user.tz,
+                'imageBlob' : $scope.myCroppedImage
             },
             url : 'http://localhost:8080/rest/updatePerson'
         });
@@ -58,6 +60,8 @@ app.factory('peopleFactory', function ($http) {
             url     : 'http://localhost:8080/rest/deletePerson'
         });
     };
+
+
 
     return factory;
 });

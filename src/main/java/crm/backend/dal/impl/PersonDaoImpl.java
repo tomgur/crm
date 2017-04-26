@@ -1,5 +1,6 @@
 package crm.backend.dal.impl;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import crm.backend.dal.dao.PersonDao;
 import crm.backend.dal.mappers.PersonMapper;
 import crm.backend.dal.pojo.Person;
@@ -25,9 +26,9 @@ public class PersonDaoImpl implements PersonDao {
         LOG.info("Person DAO is ready");
     }
 
-    public void create(String firstName, String lastName, String client, String phone, String email, String tz) {
-        String sql = "insert into person (firstName,lastName,client,phone,email,tz) values (?,?,?,?,?,?)";
-        jdbcTemplateObject.update(sql,firstName,lastName, client,phone,email,tz);
+    public void create(String firstName, String lastName, String client, String phone, String email, String tz, boolean hasImage) {
+        String sql = "insert into person (firstName,lastName,client,phone,email,tz,hasImage) values (?,?,?,?,?,?,?)";
+        jdbcTemplateObject.update(sql,firstName,lastName, client,phone,email,tz,hasImage);
         LOG.info("Added new person [" + firstName + ", " + lastName + "]");
     }
 
@@ -68,14 +69,14 @@ public class PersonDaoImpl implements PersonDao {
             person.setPhone((String) row.get("phone"));
             person.setType((String) row.get("type"));
             person.setTz((String) row.get("tz"));
-            person.setImageId(row.get("imageId")!=null ? (Integer)row.get("imageId") : 0);
+            person.setHasImage((Boolean) row.get("hasImage"));
             people.add(person);
         }
         return people;
     }
 
     public void update(Person person) {
-        String sql = "UPDATE person SET  email=?, client=?, firstName=?, lastName=?, phone=?,tz=? WHERE personId =?";
-        jdbcTemplateObject.update(sql, person.getEmail(),person.getClient(),person.getFirstName(),person.getLastName(),person.getPhone(),person.getTz(),person.getPersonId());
+        String sql = "UPDATE person SET  email=?, client=?, firstName=?, lastName=?, phone=?, tz=?, hasImage=? WHERE personId =?";
+        jdbcTemplateObject.update(sql, person.getEmail(),person.getClient(),person.getFirstName(),person.getLastName(),person.getPhone(),person.getTz(),person.getHasImage(),person.getPersonId());
     }
 }

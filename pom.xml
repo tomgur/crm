@@ -26,6 +26,17 @@
             <version>1.17.1</version>
         </dependency>
         <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-multipart</artifactId>
+            <version>1.17.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+            <version>1.17.1</version>
+        </dependency>
+
+        <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>1.2</version>
@@ -168,6 +179,16 @@
             <artifactId>bootstrap</artifactId>
             <version>3.3.7</version>
         </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.ui.cropper</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.ui.bootstrap</artifactId>
+            <version>3.0.5</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -176,6 +197,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <packagingIncludes>**/*</packagingIncludes>
                 </configuration>
             </plugin>
         </plugins>

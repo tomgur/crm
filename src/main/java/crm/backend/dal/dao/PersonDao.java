@@ -11,7 +11,7 @@ import java.util.List;
 public interface PersonDao {
     void setDataSource(DataSource dataSource);
 
-    void create(String firstName, String lastName, String client, String phone, String email, String tz);
+    void create(String firstName, String lastName, String client, String phone, String email, String tz, boolean hasImage);
 
     Person getPerson(String personId);
 

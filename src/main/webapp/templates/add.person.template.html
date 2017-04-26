@@ -34,6 +34,14 @@
                     <input ng-model="user.tz">
                 </md-input-container>
             </div>
+            <div layout="row">
+                <div flex="50">
+                    <md-button class="md-raised md-primary" ng-click="showAddImageDialog()">Add Image</md-button>
+                </div>
+                <div flex="50" ng-show="myCroppedImage != null">
+                    <img ng-src="{{myCroppedImage}}">
+                </div>
+            </div>
         </form>
     </md-content>
     <md-dialog-actions layout="row"><span flex></span>

@@ -3,6 +3,8 @@
     <link rel="stylesheet" href="webjars/angular-material/1.1.3/angular-material.min.css">
     <link rel="stylesheet" href="webjars/github-com-iamisti-mdDataTable/2.2.0/md-data-table-style.css">
     <link href="webjars/angular-bootstrap-calendar/0.14.2/dist/css/angular-bootstrap-calendar.min.css" rel="stylesheet">
+    <link href="node_modules/ui-cropper/compile/minified/ui-cropper.css" rel="stylesheet">
+
 </head>
 <body layout="row" ng-controller="mainController">
 <!-- Side Navigation -->
@@ -18,23 +20,21 @@
                 <md-item-content md-ink-ripple layout="row"
                                  layout-align="start center">
                     <div class="inset">
-                        <ng-md-icon class="md-hue-1" icon="{{item.icon}}"></ng-md-icon>
+                        <ng-md-icon icon="{{item.icon}}" style="fill:teal" size="32"></ng-md-icon>
                     </div>
-                    <div class="inset">{{item.title}}
-                    </div>
+                    <div class="inset" style="color:teal">{{item.title}}</div>
                 </md-item-content>
             </a>
         </md-list-item>
         <md-divider></md-divider>
-        <md-subheader>Management</md-subheader>
+        <md-subheader class="md-hue-3">Management</md-subheader>
         <md-list-item ng-repeat="item in admin">
             <a>
                 <md-item-content md-ink-ripple layout="row" layout-align="start center">
                     <div class="inset">
-                        <ng-md-icon icon="{{item.icon}}" class="md-default-theme"></ng-md-icon>
+                        <ng-md-icon icon="{{item.icon}}" style="fill:teal" size="32"></ng-md-icon>
                     </div>
-                    <div class="inset">{{item.title}}
-                    </div>
+                    <div class="inset" style="color:teal">{{item.title}}</div>
                 </md-item-content>
             </a>
         </md-list-item>
@@ -107,6 +107,9 @@
 <script src="webjars/angular-bootstrap-calendar/0.14.2/dist/js/angular-bootstrap-calendar-tpls.min.js"></script>
 <script src="webjars/angular-ui-bootstrap/2.2.0/ui-bootstrap.min.js"></script>
 
+<!-- ui-cropper dependencies-->
+<script src="node_modules/ui-cropper/compile/minified/ui-cropper.js"></script>
+
 <!-- Application Dependencies -->
 <script src="js/app.js"></script>
 <script src="js/controller/mainController.js"></script>
@@ -114,6 +117,7 @@
 <script src="js/controller/peopleController.js"></script>
 <script src="js/controller/calendarController.js"></script>
 <script src="js/directive/mdtTableDirectives.js"></script>
+<script src="js/directive/uploadDirective.js"></script>
 <script src="js/factory/clientsFactory.js"></script>
 <script src="js/factory/peopleFactory.js"></script>
 </body>

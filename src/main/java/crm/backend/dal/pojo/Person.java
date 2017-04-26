@@ -15,7 +15,7 @@ public class Person {
     private String email;
     private String fields;
     private String courses;
-    private int imageId;
+    private Boolean hasImage;
     private String type;
     private String tz;
 
@@ -91,12 +91,12 @@ public class Person {
         this.courses = courses;
     }
 
-    public int getImageId() {
-        return imageId;
+    public Boolean getHasImage() {
+        return hasImage;
     }
 
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
+    public void setHasImage(Boolean hasImage) {
+        this.hasImage = hasImage;
     }
 
     public String getType() {

@@ -2,10 +2,15 @@
  * Created by gurt on 4/20/2017.
  */
 app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdDialog', function ($scope, $mdToast, peopleFactory, $mdDialog) {
+    $scope.imageDir = 'images/';
+    $scope.myImage = '';
+    $scope.myCroppedImage = '';
+    $scope.changingImage = false;
+
     $scope.readPeople = function () {
         peopleFactory.getPeople().then(function successCallback(responseData) {
             $scope.people = responseData.data;
-        }, function errorCallback(responseData) {
+        }, function errorCallback() {
             $scope.showToast("Something didn't work as expected....");
         });
         $scope.title = "People";
@@ -16,10 +21,10 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
             controller: 'peopleController',
             templateUrl: 'templates/add.person.template.html',
             targetEvent: ev,
-            parent : angular.element(document.body),
-            clickOutsideToClose : true,
-            scope : $scope,
-            preserveScope : true
+            parent: angular.element(document.body),
+            clickOutsideToClose: true,
+            scope: $scope,
+            preserveScope: true
         });
     };
 
@@ -29,7 +34,7 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
             // $scope.showToast(response.data);
 
             // close the dialog
-            $scope.cancel();
+            $scope.hide();
 
             $scope.readPeople();
             // remove form values
@@ -70,17 +75,17 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
             .ok('Yes')
             .cancel('No');
 
-        $mdDialog.show(confirm).then(function() {
+        $mdDialog.show(confirm).then(function () {
             // delete the person
             peopleFactory.deletePerson($scope.user.id).then(function successCallback() {
                 $scope.showToast("Person [" + $scope.user.firstName + " " + $scope.user.lastName + "] was deleted successfully");
                 // close the dialog
-                $scope.cancel();
+                $scope.hide();
                 // remove form values
                 $scope.clearPeopleForm();
                 $scope.readPeople();
             });
-        }, function() {
+        }, function () {
             $scope.showToast("Person was NOT deleted");
             $scope.clearPeopleForm();
         });
@@ -95,6 +100,7 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
             $scope.user.phone = responseData.data.phone;
             $scope.user.tz = responseData.data.tz;
             $scope.user.email = responseData.data.email;
+            $scope.user.hasImage = responseData.data.hasImage;
         });
     };
 
@@ -110,10 +116,27 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
         });
     };
 
+    $scope.showAddImageDialog = function () {
+        $mdDialog.show({
+            controller: 'peopleController',
+            templateUrl: 'templates/add.image.template.html',
+            clickOutsideToClose: true,
+            scope: $scope,
+            preserveScope: true,
+            autoWrap: true,
+            skipHide: true
+        });
+    };
+
+    $scope.changeImage = function () {
+        $scope.changingImage = true;
+        $scope.showAddImageDialog();
+    }
+
     $scope.updatePerson = function () {
         peopleFactory.updatePerson($scope).then(function successCallback() {
             $scope.showToast("Updated person [" + $scope.user.firstName + " " + $scope.user.lastName + "]");
-            $scope.cancel();
+            $scope.hide();
             $scope.clearPeopleForm();
             $scope.readPeople();
         }, function errorCallback() {
@@ -124,8 +147,17 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
     // methods for dialog box
     $scope.cancel = function () {
         $mdDialog.cancel();
-        $scope.clearPeopleForm();
     };
+
+    $scope.hide = function () {
+        $mdDialog.hide();
+        $scope.digest();
+    };
+
+    $scope.reloadPersonInfo = function () {
+        $mdDialog.hide();
+        $scope.showPersonInfoDialog($scope.user.id)
+    }
 
     $scope.showToast = function (message) {
         $mdToast.show(

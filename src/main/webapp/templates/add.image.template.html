@@ -1,0 +1,38 @@
+<md-dialog aria-label="Image" flex="50">
+    <md-toolbar class="md-hue-2 md-toolbar-tools">
+        <h3>Choose and Crop Image</h3>
+    </md-toolbar>
+    <div layout="row">
+        <div flex>
+                <input id="file_input_file" class="ng-hide" type="file" upload>
+                <label for="file_input_file" class="md-button md-raised md-primary">
+                    Click to choose image file
+                </label>
+
+        </div>
+    </div>
+    <div layout="row">
+        <div flex="70" style="vertical-align: top; margin-left: 10px">
+            <ui-cropper image="myImage"
+                        area-type="rectangle"
+                        aspect-ratio="0.75"
+                        init-max-area="true"
+                        result-image="myCroppedImage"
+                        result-image-size='{w: 225,h: 300}'
+                        style="
+                        height: 50%;
+                        width: 50%;
+                        vertical-align: top;">
+            </ui-cropper>
+        </div>
+        <div flex>
+            <div>
+                <h3>Cropped Image:</h3>
+                <img ng-src="{{myCroppedImage}}" border="1"/>
+            </div>
+        </div>
+    </div>
+    <div layout="row" align="right">
+        <md-button class="md-raised md-warn" ng-click="cancel()">OK</md-button>
+    </div>
+</md-dialog>

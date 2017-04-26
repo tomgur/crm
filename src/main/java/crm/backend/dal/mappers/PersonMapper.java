@@ -22,7 +22,7 @@ public class PersonMapper implements RowMapper<Person> {
         person.setCourses(resultSet.getString("courses"));
         person.setFields(resultSet.getString("fields"));
         person.setType(resultSet.getString("type"));
-        person.setImageId(resultSet.getInt("imageId"));
+        person.setHasImage(resultSet.getBoolean("hasImage"));
         return person;
     }
 }

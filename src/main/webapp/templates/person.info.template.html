@@ -4,6 +4,13 @@
     </md-toolbar>
     <md-content class="md-padding">
         <form name="userForm">
+            <div layout layout-sm="column" ng-show="user.hasImage">
+                <img ng-src="{{!changingImage ? imageDir + '/' + user.firstName + '_' + user.lastName + '.png' : myCroppedImage}}" height="200" width="150" border="1" style="margin-top:10px; margin-bottom:15px">
+            </div>
+            <div layout="column">
+                <md-button class="md-raised md-primary" ng-click="showAddImageDialog()" ng-show="!user.hasImage">Add Image</md-button>
+                <md-button class="md-raised md-accent" ng-click="changeImage()" ng-show="user.hasImage">Change Image</md-button>
+            </div>
             <div layout layout-sm="column">
                 <md-input-container flex>
                     <label>First Name</label>
