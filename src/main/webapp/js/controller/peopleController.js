@@ -52,6 +52,8 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
         $scope.user.client = "";
         $scope.user.id = "";
         $scope.user.tz = "";
+        $scope.hasImage = false;
+        $scope.changingImage = false;
     };
 
     $scope.showRowId = function (rowId) {
@@ -123,7 +125,6 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
             clickOutsideToClose: true,
             scope: $scope,
             preserveScope: true,
-            autoWrap: true,
             skipHide: true
         });
     };
@@ -147,11 +148,11 @@ app.controller('peopleController', ['$scope', '$mdToast', 'peopleFactory', '$mdD
     // methods for dialog box
     $scope.cancel = function () {
         $mdDialog.cancel();
+        $scope.clearPeopleForm();
     };
 
     $scope.hide = function () {
         $mdDialog.hide();
-        $scope.digest();
     };
 
     $scope.reloadPersonInfo = function () {
